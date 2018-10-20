@@ -1,0 +1,30 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:background="@color/background"
+    android:padding="0dp"
+    tools:context="fr.arkasoft.carnetdevol.OneFlightFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_corner_round"
+        android:elevation="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/certificatMedical"
+            style="@style/textRemindFrag"
+            android:text="date de la visite médicale" />
+
+        <TextView
+            android:id="@+id/visitePn"
+            style="@style/textRemindFrag"
+            android:text="date de la visite PN" />
+
+    </LinearLayout>
+
+</FrameLayout>

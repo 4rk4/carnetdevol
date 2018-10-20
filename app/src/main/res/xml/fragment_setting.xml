@@ -1,0 +1,45 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/frag_pref_title_licence">
+        <EditTextPreference
+            android:defaultValue="@string/frag_pref_date_default"
+            android:inputType="date"
+            android:key="prefDateLicence"
+            android:maxLength="10"
+            android:title="@string/frag_pref_date_licence" />
+        <EditTextPreference
+            android:inputType="number"
+            android:key="prefNumLicence"
+            android:maxLength="7"
+            android:title="@string/frag_pref_num_licence" />
+        <ListPreference
+            android:entries="@array/fonction_bord"
+            android:entryValues="@array/fonction_bord"
+            android:key="prefFunction"
+            android:title="@string/frag_pref_fonction" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/frag_pref_title_pn">
+        <EditTextPreference
+            android:defaultValue="@string/frag_pref_date_default"
+            android:inputType="date"
+            android:key="prefDatePn"
+            android:maxLength="10"
+            android:title="@string/frag_pref_date_medical_pn" />
+
+        <EditTextPreference
+            android:defaultValue="@string/frag_pref_date_default"
+            android:inputType="date"
+            android:key="prefDateCertificatMediacal"
+            android:maxLength="10"
+            android:title="@string/frag_pref_date_medical" />
+
+        <EditTextPreference
+            android:defaultValue="20"
+            android:inputType="number"
+            android:key="age"
+            android:maxLength="2"
+            android:title="@string/frag_pref_age" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

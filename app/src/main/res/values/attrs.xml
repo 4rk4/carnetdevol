@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Cercle">
+        <attr name="jour" format="integer" />
+        <attr name="nuit" format="integer" />
+    </declare-styleable>
+</resources>

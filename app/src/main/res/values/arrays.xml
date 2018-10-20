@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="stat">
+        <item>Total des heures de vols</item>
+        <item>Ce mois ci</item>
+        <item>Cette année</item>
+    </string-array>
+    <string-array name="type_avion">
+        <item>DR400</item>
+        <item>PA28</item>
+        <item>C152</item>
+        <item>C172</item>
+    </string-array>
+    <string-array name="arrivees_ifr">
+        <item>DME</item>
+        <item>GLIDE</item>
+        <item>TACAN</item>
+        <item>OMNI</item>
+        <item>RNAV</item>
+    </string-array>
+    <string-array name="nature_vol">
+        <item>LOCAL</item>
+        <item>TAG</item>
+        <item>VFR</item>
+        <item>INSTRUCTION</item>
+    </string-array>
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/myflight"
+            android:icon="@drawable/ic_flight"
+            android:title="@string/act_main_drawer_my_flight" />
+        <item
+            android:id="@+id/add"
+            android:icon="@drawable/ic_add"
+            android:title="@string/act_main_drawer_add" />
+        <item
+            android:id="@+id/statistic"
+            android:icon="@drawable/ic_stat"
+            android:title="@string/act_main_drawer_stat" />
+        <item
+            android:id="@+id/remember"
+            android:icon="@drawable/ic_horloge"
+            android:title="@string/act_main_drawer_racall" />
+    </group>
+
+    <item android:title="@string/act_main_drawer_communicate">
+        <menu>
+            <item
+                android:id="@+id/contact_author"
+                android:icon="@android:drawable/ic_menu_send"
+                android:title="@string/act_main_drawer_contact" />
+        </menu>
+    </item>
+
+</menu>

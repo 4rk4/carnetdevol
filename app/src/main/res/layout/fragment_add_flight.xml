@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_corner_round"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:orientation="horizontal"
+            android:padding="0dp">
+
+            <Button
+                android:id="@+id/flight_date"
+                style="@style/buttonFlat"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:tag="date"
+                android:text="@string/frag_add_flight_date" />
+
+            <Button
+                android:id="@+id/flight_heure_debut"
+                style="@style/buttonFlat"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:onClick="showTimePickerDialog"
+                android:tag="start_hour"
+                android:text="@string/frag_add_flight_start_hour" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:orientation="horizontal"
+            android:padding="0dp">
+
+            <Button
+                android:id="@+id/jour"
+                style="@style/buttonFlat"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/frag_add_flight_hdv_jour" />
+
+            <Button
+                android:id="@+id/nuit"
+                style="@style/buttonFlat"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/frag_add_flight_hdv_nuit" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ongletAvion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_corner_dark_accent_color"
+            android:baselineAligned="false"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/frag_add_flight_function" />
+
+            <Spinner
+                android:id="@+id/fonction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:entries="@array/fonction_bord"
+                android:textAlignment="center" />
+
+            <AutoCompleteTextView
+                android:id="@+id/natureVol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:completionThreshold="1"
+                android:hint="@string/frag_add_flight_nature"
+                android:inputType="textAutoComplete|textCapCharacters" />
+
+            <EditText
+                android:id="@+id/observation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/frag_add_flight_observation"
+                android:inputType="textAutoComplete|textCapCharacters" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/avionType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:completionThreshold="1"
+                    android:hint="@string/frag_add_flight_type"
+                    android:inputType="textAutoComplete|textCapCharacters"
+                    android:maxLength="6"
+                    android:maxLines="1" />
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/avionImmat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:completionThreshold="1"
+                    android:hint="@string/frag_add_flight_immat"
+                    android:inputType="textAutoComplete|textCapCharacters"
+                    android:maxLength="5"
+                    android:maxLines="1" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/titleOngletIfr"
+            style="@style/buttonFlat"
+            android:text="@string/frag_add_flight_is_ifr" />
+
+        <LinearLayout
+            android:id="@+id/ongletIfr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:background="@drawable/shape_corner_dark_accent_color"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Switch
+                    android:id="@+id/ifr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elegantTextHeight="true"
+                    android:text="@string/frag_add_flight_is_ifr"
+                    android:textAlignment="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/arriveesIfr"
+                    android:text="@string/frag_add_flight_ifr_arr" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/arriveesIfr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:completionHint="@string/frag_add_flight_help_autocomplete"
+                    android:completionThreshold="1"
+                    android:inputType="textAutoComplete|textCapCharacters"
+                    android:maxLines="1" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/titleOngletDiver"
+            style="@style/buttonFlat"
+            android:layout_marginBottom="15dp"
+            android:text="@string/frag_add_flight_tab_various" />
+
+        <LinearLayout
+            android:id="@+id/ongletDivers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_corner_dark_accent_color"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+
+            <Switch
+                android:id="@+id/simulation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:elegantTextHeight="true"
+                android:text="@string/frag_add_flight_simu"
+                android:textAlignment="center" />
+
+            <Switch
+                android:id="@+id/multi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:elegantTextHeight="true"
+                android:text="@string/frag_add_flight_multi"
+                android:textAlignment="center" />
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/titleOngletAtt"
+            style="@style/buttonFlat"
+            android:text="@string/frag_add_flight_att" />
+
+
+        <LinearLayout
+            android:id="@+id/ongletAtt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_corner_dark_accent_color"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/frag_add_flight_att_day" />
+
+                <NumberPicker
+                    android:id="@+id/attJour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textAllCaps="true" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/frag_add_flight_att_night" />
+
+                <NumberPicker
+                    android:id="@+id/attNuit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/addOneFlight"
+            style="@style/button"
+            android:text="@string/frag_add_flight_save" />
+
+    </LinearLayout>
+
+
+    <!--</LinearLayout>-->
+
+</android.support.v4.widget.NestedScrollView>
