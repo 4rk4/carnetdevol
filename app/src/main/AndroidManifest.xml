@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="fr.arkasoft.carnetdevol">
+
+    <application
+        android:allowBackup="true"
+        android:backupAgent="fr.arkasoft.carnetdevol.CarnetDeVolBackupAgent"
+        android:backupInForeground="true"
+        android:fullBackupContent="@xml/backup_scheme"
+        android:fullBackupOnly="true"
+        android:icon="@mipmap/logo"
+        android:label="@string/nav_header_main_app_name"
+        android:supportsRtl="true"
+        android:theme="@style/ASW"
+        tools:ignore="GoogleAppIndexingWarning">
+        <meta-data
+            android:name="com.google.android.backup.api_key"
+            android:value="" />
+        <activity
+            android:name="fr.arkasoft.carnetdevol.MainActivity"
+            android:label="@string/nav_header_main_app_name"
+            android:theme="@style/ASW.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
