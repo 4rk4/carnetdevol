@@ -1,2 +1,6 @@
 # carnetdevol
-A flight book on your smartphone.
+
+## Description
+
+An Electronic Flight Book for pilot and PNC on android.
+the most simple flight log book you can have.
