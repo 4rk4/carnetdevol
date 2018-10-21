@@ -28,7 +28,7 @@ public class NumberPickerFragment extends android.support.v4.app.DialogFragment 
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
             callback = ( OnValidateListener ) getActivity( ).getSupportFragmentManager( ).findFragmentById( R.id.mainFrag );
-        } catch ( ClassCastException e ) {
+        } catch( ClassCastException e ) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException( activity.toString( )
                                           + " must implement OnValidateListener" );

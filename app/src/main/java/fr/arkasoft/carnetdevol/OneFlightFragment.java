@@ -37,7 +37,7 @@ public class OneFlightFragment extends Fragment {
     @Override
     public void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-        if ( getArguments( ) != null ) {
+        if( getArguments( ) != null ) {
             idFlight = getArguments( ).getInt( ARG_PARAM );
         }
     }
@@ -57,8 +57,8 @@ public class OneFlightFragment extends Fragment {
         
         int positionToShow = 0;
         int compteur       = 0;
-        for ( Flight f : flights ) {
-            if ( f.getId( ) == idFlight ) {
+        for( Flight f : flights ) {
+            if( f.getId( ) == idFlight ) {
                 positionToShow = compteur;
                 Log.i( "DEBUG POSITION TO SHOW", String.valueOf( positionToShow ) );
                 Log.i( "DEBUG COMPTEUR", String.valueOf( compteur ) );

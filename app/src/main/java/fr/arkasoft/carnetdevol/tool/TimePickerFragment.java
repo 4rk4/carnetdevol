@@ -23,7 +23,7 @@ public class TimePickerFragment extends DialogFragment {
         // the callback interface. If not, it throws an exception
         try {
             callback = ( TimePickerDialog.OnTimeSetListener ) activity;
-        } catch ( ClassCastException e ) {
+        } catch( ClassCastException e ) {
             throw new ClassCastException( activity.toString( )
                                           + " must implement OnHeadlineSelectedListener" );
         }

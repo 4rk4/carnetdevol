@@ -44,8 +44,8 @@ public class SettingFragment extends PreferenceFragment implements SharedPrefere
                                            String key ) {
         DateFormat               sdf    = new SimpleDateFormat( "dd/MM/yyyy" );
         SharedPreferences.Editor editor = sharedPreferences.edit( );
-        
-        if ( key.equals( KEY_PREF_DATE_PN ) ) {
+    
+        if( key.equals( KEY_PREF_DATE_PN ) ) {
             Preference pref     = findPreference( key );
             String     ladate[] = pref.getSharedPreferences( ).getString( KEY_PREF_DATE_PN, "01/01/2015" ).split( "/" );
             
@@ -59,8 +59,8 @@ public class SettingFragment extends PreferenceFragment implements SharedPrefere
             // datePn.setText(getResources().getString(R.string.prochainePN) + ": " + dateFormaterPn);
             editor.putString( "nextDatePn", dateFormaterPn );
             editor.apply( );
-            
-        } else if ( key.equals( KEY_PREF_DATE_CIV ) ) {
+        
+        } else if( key.equals( KEY_PREF_DATE_CIV ) ) {
             Preference pref      = findPreference( key );
             String     ladate2[] = pref.getSharedPreferences( ).getString( "prefDateCertificatMediacal", "01/01/2015" ).split( "/" );
             String     age       = pref.getSharedPreferences( ).getString( "age", "20" );
@@ -71,9 +71,9 @@ public class SettingFragment extends PreferenceFragment implements SharedPrefere
             cal2.set( Calendar.DAY_OF_MONTH, Integer.valueOf( ladate2[ 0 ] ) );
             cal2.add( Calendar.DAY_OF_MONTH, -1 );
             // fonction de l'age la visite med est plus rapproché
-            if ( Integer.valueOf( age ) > 50 ) {
+            if( Integer.valueOf( age ) > 50 ) {
                 cal2.add( Calendar.YEAR, 1 );
-            } else if ( Integer.valueOf( age ) < 40 ) {
+            } else if( Integer.valueOf( age ) < 40 ) {
                 cal2.add( Calendar.YEAR, 5 );
             } else {
                 cal2.add( Calendar.YEAR, 2 );

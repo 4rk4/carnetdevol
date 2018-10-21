@@ -30,7 +30,7 @@ public class StatisticTabFragment extends Fragment {
         Bundle args   = getArguments( );
         int    numVue = args.getInt( "pos" );
         int    resId;
-        switch ( numVue ) {
+        switch( numVue ) {
             case 0:
                 resId = R.layout.fragment_statistic_hdv;
                 break;

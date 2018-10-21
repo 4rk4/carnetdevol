@@ -68,7 +68,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         try {
             Date date = sdfIn.parse( dateToShow );
             dateOut = sdfOut.format( date );
-        } catch ( Exception e ) {
+        } catch( Exception e ) {
             e.printStackTrace( );
         }
         return dateOut;
@@ -82,7 +82,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         try {
             Date date = sdfIn.parse( dateToShow );
             dateOut = sdfOut.format( date );
-        } catch ( Exception e ) {
+        } catch( Exception e ) {
             e.printStackTrace( );
         }
         return dateOut;
@@ -139,7 +139,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         db = getReadableDatabase( );
         // Séléction d'un élément dont l'id est
         String whereClause = COL_ID + " = ?";
-        String[] whereArgs = new String[]{
+        String[] whereArgs = new String[] {
                 Integer.toString( id )
         };
         
@@ -163,13 +163,13 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         //String test = String.valueOf(c.getColumnIndexOrThrow(COL_MULTI_MONO));
         //String test1 = String.valueOf(c.getColumnIndexOrThrow(COL_IFR_VFR));
         //String test2 = String.valueOf(c.getColumnIndexOrThrow(COL_SIMU_VOL));
-        if ( c.getInt( c.getColumnIndexOrThrow( COL_MULTI_MONO ) ) == 0 ) {
+        if( c.getInt( c.getColumnIndexOrThrow( COL_MULTI_MONO ) ) == 0 ) {
             multi = false;
         }
-        if ( c.getInt( c.getColumnIndexOrThrow( COL_IFR_VFR ) ) == 0 ) {
+        if( c.getInt( c.getColumnIndexOrThrow( COL_IFR_VFR ) ) == 0 ) {
             ifr = false;
         }
-        if ( c.getInt( c.getColumnIndexOrThrow( COL_SIMU_VOL ) ) == 0 ) {
+        if( c.getInt( c.getColumnIndexOrThrow( COL_SIMU_VOL ) ) == 0 ) {
             simu = false;
         }
         
@@ -197,7 +197,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
     }
     
     public String affFonction( String fonc ) {
-        if ( fonc.length( ) < 2 ) {
+        if( fonc.length( ) < 2 ) {
             String[] fonctions = this.context.getResources( ).getStringArray( R.array.fonction_bord );
             return fonctions[ Integer.valueOf( fonc ) ];
         } else {
@@ -210,7 +210,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         db = getWritableDatabase( );
         
         //Formattage des champs vide
-        if ( flight.getObs( ).equalsIgnoreCase( "" ) ) {
+        if( flight.getObs( ).equalsIgnoreCase( "" ) ) {
             flight.setObs( context.getResources( ).getString( R.string.msg_ras ) );
         }
         
@@ -271,7 +271,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         c.moveToFirst( );
         
         //Contrôle si aucun enregistrement renvoyé
-        if ( c.getCount( ) > 0 ) {
+        if( c.getCount( ) > 0 ) {
             do {
                 int    dbId         = c.getInt( c.getColumnIndexOrThrow( COL_ID ) );
                 String dbHeuresJour = c.getString( c.getColumnIndexOrThrow( COL_HEURES_JOUR ) );
@@ -283,7 +283,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
                 oneFlight.setAircraft_type( c.getString( c.getColumnIndexOrThrow( COL_AIRCRAFT_TYPE ) ) );
                 oneFlight.setHeureFin( c.getString( c.getColumnIndexOrThrow( COL_HEURE_FIN ) ) );
                 ensembleDesVols.add( oneFlight );
-            } while ( c.moveToNext( ) );
+            } while( c.moveToNext( ) );
         }
         c.close( );
         db.close( );
@@ -301,7 +301,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         String   currentMonthFormat = String.format( "%02d", currentMonth );
         
         String where = null;
-        String[] projection = new String[]{
+        String[] projection = new String[] {
                 COL_DATE,
                 COL_HEURES_JOUR,
                 COL_HEURES_NUIT,
@@ -309,8 +309,8 @@ public class FlightDbHelper extends SQLiteOpenHelper {
                 COL_ATT_NUIT,
                 COL_FONCTION_BORD
         };
-        
-        switch ( TYPE_STAT ) {
+    
+        switch( TYPE_STAT ) {
             case STAT_MOIS_EN_COURS:
                 where = " strftime('%m', " + COL_DATE + ") = '" + currentMonthFormat
                         + "' and strftime('%Y', " + COL_DATE + ") = '" + currentYear + "'"
@@ -341,23 +341,23 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         float attJour         = 0f;
         float attNuit         = 0f;
         //int endCursor = c.getCount();
-        if ( c.getCount( ) > 0 ) {
+        if( c.getCount( ) > 0 ) {
             do {
                 String col_heures_jour = c.getString( c.getColumnIndexOrThrow( COL_HEURES_JOUR ) );
                 String col_heures_nuit = c.getString( c.getColumnIndexOrThrow( COL_HEURES_NUIT ) );
-                
-                if ( col_heures_jour.contains( ":" ) ) {
+    
+                if( col_heures_jour.contains( ":" ) ) {
                     String[] heuresJour = col_heures_jour.split( ":" );
                     heuresJourTotal += Float.valueOf( heuresJour[ 0 ] ) + Float.valueOf( heuresJour[ 1 ] ) / 60;
                 }
-                if ( col_heures_nuit.contains( ":" ) ) {
+                if( col_heures_nuit.contains( ":" ) ) {
                     String[] heuresNuit = col_heures_nuit.split( ":" );
                     heuresNuitTotal += Float.valueOf( heuresNuit[ 0 ] ) + Float.valueOf( heuresNuit[ 1 ] ) / 60;
                 }
                 attJour += c.getFloat( c.getColumnIndexOrThrow( COL_ATT_JOUR ) );
                 attNuit += c.getFloat( c.getColumnIndexOrThrow( COL_ATT_NUIT ) );
-                
-            } while ( c.moveToNext( ) );
+    
+            } while( c.moveToNext( ) );
         }
         
         HashMap lesStats = new HashMap( );
@@ -379,7 +379,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         try {
             doc = Jsoup.parse( carnet );
             Elements allFlights = doc.select( "flight" );
-            for ( Element e : allFlights ) {
+            for( Element e : allFlights ) {
                 isInserted = insertFlight( new Flight(
                         e.getElementsByTag( "COL_DATE" ).first( ).ownText( ),
                         e.getElementsByTag( "COL_HEURE_DEBUT" ).first( ).ownText( ),
@@ -398,7 +398,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
                         Integer.valueOf( e.getElementsByTag( "COL_ATT_NUIT" ).first( ).ownText( ) ),
                         e.getElementsByTag( "COL_OBS" ).first( ).ownText( ) ) );
             }
-        } catch ( Exception e ) {
+        } catch( Exception e ) {
             e.printStackTrace( );
         }
         return isInserted;
@@ -429,7 +429,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         //        }
         
         //Formattage des champs vide
-        if ( flight.getObs( ).equalsIgnoreCase( "" ) ) {
+        if( flight.getObs( ).equalsIgnoreCase( "" ) ) {
             flight.setObs( context.getResources( ).getString( R.string.msg_ras ) );
         }
         
@@ -459,7 +459,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
                     TABLE_NAME,
                     null,
                     values );
-        } catch ( Exception e ) {
+        } catch( Exception e ) {
             e.printStackTrace( );
         }
         db.close( );
@@ -477,7 +477,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
             xmlSerialize.startTag( "", "flights" );
             db = getReadableDatabase( );
             Cursor c = db.rawQuery( "SELECT * FROM flight;", null );
-            if ( c.moveToFirst( ) ) {
+            if( c.moveToFirst( ) ) {
                 do {
                     xmlSerialize.startTag( "", "flight" );
                     xmlSerialize.startTag( "", "COL_DATE" );
@@ -529,13 +529,13 @@ public class FlightDbHelper extends SQLiteOpenHelper {
                     xmlSerialize.text( c.getString( c.getColumnIndexOrThrow( COL_OBS ) ) );
                     xmlSerialize.endTag( "", "COL_OBS" );
                     xmlSerialize.endTag( "", "flight" );
-                } while ( c.moveToNext( ) );
+                } while( c.moveToNext( ) );
             }
             xmlSerialize.endTag( "", "flights" );
             xmlSerialize.endDocument( );
             c.close( );
             db.close( );
-        } catch ( Exception e ) {
+        } catch( Exception e ) {
             e.printStackTrace( );
         }
         
@@ -548,7 +548,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
             outputStreamWriter.write( writer.toString( ) );
             outputStreamWriter.close( );
             ret = true;
-        } catch ( Exception e ) {
+        } catch( Exception e ) {
             e.printStackTrace( );
         }
         
@@ -577,8 +577,8 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         ArrayList< String > typeAvion        = new ArrayList<>( Arrays.asList( defaultTypeAvion ) );
         
         db = getReadableDatabase( );
-        
-        String[] projection = new String[]{
+    
+        String[] projection = new String[] {
                 COL_AIRCRAFT_TYPE
         };
         
@@ -595,10 +595,10 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         c.moveToFirst( );
         
         //Contrôle si aucun enregistrement renvoyé
-        if ( c.getCount( ) > 0 ) {
+        if( c.getCount( ) > 0 ) {
             do {
                 typeAvion.add( c.getString( c.getColumnIndexOrThrow( COL_AIRCRAFT_TYPE ) ) );
-            } while ( c.moveToNext( ) );
+            } while( c.moveToNext( ) );
         }
         c.close( );
         db.close( );
@@ -612,8 +612,8 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         ArrayList< String > tab        = new ArrayList<>( Arrays.asList( defaultTab ) );
         
         db = getReadableDatabase( );
-        
-        String[] projection = new String[]{
+    
+        String[] projection = new String[] {
                 COL_NATURE_VOL
         };
         
@@ -630,10 +630,10 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         c.moveToFirst( );
         
         //Contrôle si aucun enregistrement renvoyé
-        if ( c.getCount( ) > 0 ) {
+        if( c.getCount( ) > 0 ) {
             do {
                 tab.add( c.getString( c.getColumnIndexOrThrow( COL_NATURE_VOL ) ) );
-            } while ( c.moveToNext( ) );
+            } while( c.moveToNext( ) );
         }
         c.close( );
         db.close( );
@@ -645,7 +645,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         ArrayList< String > tab = new ArrayList<>( );
         
         db = getReadableDatabase( );
-        String[] projection = new String[]{
+        String[] projection = new String[] {
                 COL_AIRCRAFT_IMMAT
         };
         
@@ -662,10 +662,10 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         c.moveToFirst( );
         
         //Contrôle si aucun enregistrement renvoyé
-        if ( c.getCount( ) > 0 ) {
+        if( c.getCount( ) > 0 ) {
             do {
                 tab.add( c.getString( c.getColumnIndexOrThrow( COL_AIRCRAFT_IMMAT ) ) );
-            } while ( c.moveToNext( ) );
+            } while( c.moveToNext( ) );
         }
         c.close( );
         db.close( );
@@ -678,8 +678,8 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         ArrayList< String > tab        = new ArrayList<>( Arrays.asList( defaultTab ) );
         
         db = getReadableDatabase( );
-        
-        String[] projection = new String[]{
+    
+        String[] projection = new String[] {
                 COL_ARRIVEES_IFR
         };
         
@@ -696,10 +696,10 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         c.moveToFirst( );
         
         //Contrôle si aucun enregistrement renvoyé
-        if ( c.getCount( ) > 0 ) {
+        if( c.getCount( ) > 0 ) {
             do {
                 tab.add( c.getString( c.getColumnIndexOrThrow( COL_ARRIVEES_IFR ) ) );
-            } while ( c.moveToNext( ) );
+            } while( c.moveToNext( ) );
         }
         c.close( );
         db.close( );
@@ -738,7 +738,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         affichage.append( "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n" );
         affichage.append( "+ ID +------- DATE -------+HDEBUT+ HFIN + JOUR + NUIT +------- NATURE -----+ IMMAT + TYPE +------- FUNCT ------+ IFR + SIMU + MULTI + ATTJ + ATTN + ARRIV +----- OBS -----+\n" );
         affichage.append( "+----+--------------------+------+------+------+------+--------------------+-------+------+--------------------+-----+------+-------+------+------+-------+---------------+\n" );
-        if ( c.getCount( ) > 0 ) {
+        if( c.getCount( ) > 0 ) {
             do {
                 affichage.append( String.format( "|%-4s|", c.getInt( c.getColumnIndexOrThrow( COL_ID ) ) ) );
                 affichage.append( String.format( "%-20s|", c.getString( c.getColumnIndexOrThrow( COL_DATE ) ) ) );
@@ -758,7 +758,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
                 affichage.append( String.format( "%-7s|", c.getString( c.getColumnIndexOrThrow( COL_ARRIVEES_IFR ) ) ) );
                 affichage.append( String.format( "%-15s|", c.getString( c.getColumnIndexOrThrow( COL_OBS ) ) ) );
                 affichage.append( "\n+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\n" );
-            } while ( c.moveToNext( ) );
+            } while( c.moveToNext( ) );
         }
         c.close( );
         db.close( );

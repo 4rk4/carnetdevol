@@ -50,8 +50,8 @@ public class OneFlightTabFragment extends Fragment {
                             getResources( ).getString( R.string.frag_one_flight_hour_day ) + " - " +
                             String.valueOf( oneFlight.getHeuresNuit( ) ) + " " +
                             getResources( ).getString( R.string.frag_one_flight_hour_night ) );
-        
-        if ( !oneFlight.getNature_vol( ).equalsIgnoreCase( "" ) ) {
+    
+        if( !oneFlight.getNature_vol( ).equalsIgnoreCase( "" ) ) {
             infosOneFlight.add(
                     getResources( ).getString( R.string.frag_one_flight_nature ) + " " +
                     oneFlight.getNature_vol( ) );
@@ -63,22 +63,22 @@ public class OneFlightTabFragment extends Fragment {
         
         infosOneFlight.add( getResources( ).getString( R.string.frag_one_flight_obs ) + " " +
                             oneFlight.getObs( ) );
-        
-        if ( oneFlight.isIfr_vfr( ) ) {
+    
+        if( oneFlight.isIfr_vfr( ) ) {
             infosOneFlight.add( getResources( ).getString( R.string.frag_one_flight_ifr ) );
         } else {
             infosOneFlight.add( getResources( ).getString( R.string.frag_one_flight_vfr ) );
         }
-        
-        if ( oneFlight.isSimu_vol( ) ) {
+    
+        if( oneFlight.isSimu_vol( ) ) {
             infosOneFlight.add( getResources( ).getString( R.string.frag_one_flight_simu ) );
         }
-        
-        if ( oneFlight.isMulti_mono( ) ) {
+    
+        if( oneFlight.isMulti_mono( ) ) {
             infosOneFlight.add( getResources( ).getString( R.string.frag_one_flight_multi ) );
         }
-        
-        if ( !oneFlight.getArrivees_ifr( ).equalsIgnoreCase( "" ) ) {
+    
+        if( !oneFlight.getArrivees_ifr( ).equalsIgnoreCase( "" ) ) {
             infosOneFlight.add(
                     getResources( ).getString( R.string.frag_one_flight_arr_ifr ) + " " +
                     String.valueOf( oneFlight.getArrivees_ifr( ) ) );
@@ -134,8 +134,8 @@ public class OneFlightTabFragment extends Fragment {
                     
                     @Override
                     public void onClick( DialogInterface dialogInterface, int i ) {
-                        
-                        if ( db.deleteOneFlight( numVue ) ) {
+    
+                        if( db.deleteOneFlight( numVue ) ) {
                             Snackbar.make( view, getResources( ).getString( R.string.frag_one_flight_delete ), Snackbar.LENGTH_LONG ).show( );
                             getActivity( ).getSupportFragmentManager( )
                                           .beginTransaction( )

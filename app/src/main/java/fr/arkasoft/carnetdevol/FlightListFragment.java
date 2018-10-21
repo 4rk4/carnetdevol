@@ -40,8 +40,8 @@ public class FlightListFragment extends Fragment {
         final View view = inflater.inflate( R.layout.fragment_flight_list, null );
         
         flightDb = new FlightDbHelper( getActivity( ) );
-        
-        if ( flightDb.getAllFlight( ).isEmpty( ) ) {
+    
+        if( flightDb.getAllFlight( ).isEmpty( ) ) {
             Snackbar.make( view, getResources( ).getString( R.string.error_empty_db ), Snackbar.LENGTH_LONG ).show( );
         }
         

@@ -118,8 +118,8 @@ public class StatisticFragment extends Fragment {
         int   attNuit;
         
         HashMap< String, Float > lesHeuresTotal;
-        
-        switch ( dateSelect ) {
+    
+        switch( dateSelect ) {
             case 0:
                 lesHeuresTotal = db.getStatVol( FlightDbHelper.STAT_TOTAL, fonctionSelect );
                 break;

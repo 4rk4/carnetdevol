@@ -20,7 +20,7 @@ public class DatePickerFragment extends DialogFragment {
         
         try {
             callback = ( DatePickerDialog.OnDateSetListener ) getActivity( ).getSupportFragmentManager( ).findFragmentById( R.id.mainFrag );
-        } catch ( ClassCastException e ) {
+        } catch( ClassCastException e ) {
             throw new ClassCastException( activity.toString( )
                                           + " must implement OnDateSetListener" );
         }

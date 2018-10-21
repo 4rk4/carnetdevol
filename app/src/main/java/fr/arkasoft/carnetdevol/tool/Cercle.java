@@ -52,7 +52,7 @@ public class Cercle extends View {
         nbTotal = j + n;
         
         int total = j + n;
-        if ( total > 0 ) {
+        if( total > 0 ) {
             percentJour = j * 100 / total;
             percentNuit = n * 100 / total;
             degJour = j * 360 / total;
@@ -110,14 +110,14 @@ public class Cercle extends View {
         //        strHDN.append(" %");
         
         //        String strHDN = String.format(getResources().getString(R.string.frag_statistic_night), nbDeNuit, percentNuit);
-        if ( typeDeCercle == TypeCercle.HDV ) {
+        if( typeDeCercle == TypeCercle.HDV ) {
             canvas.drawText( String.format( getResources( ).getString( R.string.frag_statistic_night ), nbDeNuit ), textX, textY, paint );
             canvas.drawText( String.valueOf( percentNuit ) + " %", textX, textY + radius * 0.2f, paint );
             
             canvas.drawText( String.format( getResources( ).getString( R.string.frag_statistic_day ), nbDeJour ), txtJourX, txtJourY, paint );
             canvas.drawText( String.valueOf( percentJour ) + " %", txtJourX, txtJourY + radius * 0.2f, paint );
             Log.i( "DEBUG CERCLE", "hdv" );
-        } else if ( typeDeCercle == TypeCercle.ATT ) {
+        } else if( typeDeCercle == TypeCercle.ATT ) {
             canvas.drawText( String.format( getResources( ).getString( R.string.frag_statistic_att_night ), nbDeNuit ), textX, textY, paint );
             canvas.drawText( String.valueOf( percentNuit ) + " %", textX, textY + radius * 0.2f, paint );
             

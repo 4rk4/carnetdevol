@@ -36,7 +36,7 @@ public class StatisticPagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle( int position ) {
         
         String res = "";
-        switch ( position ) {
+        switch( position ) {
             case 0:
                 res = context.getResources( ).getString( R.string.frag_statistic_repart_hdv );
                 break;

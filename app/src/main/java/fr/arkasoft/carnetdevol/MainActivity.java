@@ -97,16 +97,16 @@ public class MainActivity extends AppCompatActivity
         
         int moisCiv  = Integer.valueOf( datePrefCiv[ 1 ] ) - 1;
         int anneeCiv = Integer.valueOf( datePrefCiv[ 2 ] );
-        
-        if ( ( currentMonth == moisPn ) && currentYear == anneePn ) {
+    
+        if( ( currentMonth == moisPn ) && currentYear == anneePn ) {
             notify = true;
             message = this.getResources( ).getString( R.string.rappel_pn );
         }
-        if ( ( currentMonth == moisCiv ) && currentYear == anneeCiv ) {
+        if( ( currentMonth == moisCiv ) && currentYear == anneeCiv ) {
             notify = true;
             message = this.getResources( ).getString( R.string.rappel_medical );
         }
-        if ( notify ) {
+        if( notify ) {
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder( this )
                             .setSmallIcon( R.drawable.ic_flight )
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener( this );
         
         // On affiche le frag de consultation
-        if ( savedInstanceState == null ) {
+        if( savedInstanceState == null ) {
             getSupportFragmentManager( )
                     .beginTransaction( )
                     .add( R.id.mainFrag, new FlightListFragment( ) )
@@ -152,10 +152,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult( int requestCode, int resultCode, Intent data ) {
         super.onActivityResult( requestCode, resultCode, data );
-        
-        if ( requestCode == FILE_SELECTED_CODE && resultCode == Activity.RESULT_OK ) {
+    
+        if( requestCode == FILE_SELECTED_CODE && resultCode == Activity.RESULT_OK ) {
             Uri uri;
-            if ( data != null ) {
+            if( data != null ) {
                 uri = data.getData( );
                 try {
                     ParcelFileDescriptor parcelFileDescriptor = getContentResolver( ).openFileDescriptor( uri, "r" );
@@ -163,12 +163,12 @@ public class MainActivity extends AppCompatActivity
                     BufferedReader       reader               = new BufferedReader( new InputStreamReader( inputStream ) );
                     StringBuilder        stringBuilder        = new StringBuilder( );
                     String               line;
-                    while ( ( line = reader.readLine( ) ) != null ) {
+                    while( ( line = reader.readLine( ) ) != null ) {
                         stringBuilder.append( line );
                         stringBuilder.append( "\n" );
                     }
-                    
-                    if ( fDB.importFlight( stringBuilder.toString( ) ) > 0 ) {
+    
+                    if( fDB.importFlight( stringBuilder.toString( ) ) > 0 ) {
                         Snackbar.make( getSupportFragmentManager( ).findFragmentById( R.id.mainFrag ).getView( ),
                                        getResources( ).getString( R.string.msg_import ),
                                        Snackbar.LENGTH_LONG ).show( );
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity
                     
                     inputStream.close( );
                     parcelFileDescriptor.close( );
-                } catch ( Exception e ) {
+                } catch( Exception e ) {
                     e.printStackTrace( );
                 }
             }
@@ -192,11 +192,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed( ) {
         DrawerLayout drawer = findViewById( R.id.drawer_layout );
-        if ( drawer.isDrawerOpen( GravityCompat.START ) ) {
+        if( drawer.isDrawerOpen( GravityCompat.START ) ) {
             drawer.closeDrawer( GravityCompat.START );
         }
         int count = getSupportFragmentManager( ).getBackStackEntryCount( );
-        if ( count == 0 ) {
+        if( count == 0 ) {
             super.onBackPressed( );
         } else {
             getSupportFragmentManager( ).popBackStack( );
@@ -213,8 +213,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected( MenuItem item ) {
         int id = item.getItemId( );
-        
-        if ( id == R.id.action_settings ) {
+    
+        if( id == R.id.action_settings ) {
             getSupportFragmentManager( )
                     .beginTransaction( )
                     .remove( getSupportFragmentManager( )
@@ -226,25 +226,25 @@ public class MainActivity extends AppCompatActivity
                     .commit( );
             return true;
         }
-        
-        if ( id == R.id.action_export ) {
-            if ( fDB.export( ) ) {
+    
+        if( id == R.id.action_export ) {
+            if( fDB.export( ) ) {
                 Snackbar.make( getSupportFragmentManager( ).findFragmentById( R.id.mainFrag ).getView( ),
                                getResources( ).getString( R.string.msg_export ),
                                Snackbar.LENGTH_LONG ).show( );
             }
             return true;
         }
-        
-        if ( id == R.id.action_import ) {
+    
+        if( id == R.id.action_import ) {
             Intent intent = new Intent( );
             intent.setAction( Intent.ACTION_GET_CONTENT );
             intent.setType( "text/xml" );
             startActivityForResult( intent, FILE_SELECTED_CODE );
             return true;
         }
-        
-        if ( id == R.id.action_delete_all ) {
+    
+        if( id == R.id.action_delete_all ) {
             AlertDialog.Builder builder = new AlertDialog.Builder( this );
             builder.setMessage( getResources( ).getString( R.string.dialog_delete_all ) )
                    .setTitle( getResources( ).getString( R.string.dialog_delete_title ) )
@@ -276,46 +276,46 @@ public class MainActivity extends AppCompatActivity
         
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager( );
-        
-        if ( id == R.id.add ) {
+    
+        if( id == R.id.add ) {
             try {
                 fragmentManager
                         .beginTransaction( )
                         .replace( R.id.mainFrag, new AddFlightFragment( ) )
                         .addToBackStack( null )
                         .commit( );
-            } catch ( Exception e ) {
+            } catch( Exception e ) {
                 e.printStackTrace( );
             }
-        } else if ( id == R.id.myflight ) {
+        } else if( id == R.id.myflight ) {
             try {
                 fragmentManager
                         .beginTransaction( )
                         .replace( R.id.mainFrag, new FlightListFragment( ) )
                         .addToBackStack( null )
                         .commit( );
-            } catch ( Exception e ) {
+            } catch( Exception e ) {
                 e.printStackTrace( );
             }
-        } else if ( id == R.id.statistic ) {
+        } else if( id == R.id.statistic ) {
             try {
                 fragmentManager
                         .beginTransaction( )
                         .replace( R.id.mainFrag, new StatisticFragment( ) )
                         .addToBackStack( null )
                         .commit( );
-            } catch ( Exception e ) {
+            } catch( Exception e ) {
                 e.printStackTrace( );
             }
-            
-        } else if ( id == R.id.remember ) {
+        
+        } else if( id == R.id.remember ) {
             try {
                 fragmentManager
                         .beginTransaction( )
                         .replace( R.id.mainFrag, new RememberFragment( ) )
                         .addToBackStack( null )
                         .commit( );
-            } catch ( Exception e ) {
+            } catch( Exception e ) {
                 e.printStackTrace( );
             }
         }
@@ -324,7 +324,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer( GravityCompat.START );
         
         //Contact de l'auteur
-        if ( id == R.id.contact_author ) {
+        if( id == R.id.contact_author ) {
             String   sujet  = getResources( ).getString( R.string.contact_subject );
             String[] email  = { getResources( ).getString( R.string.contact_email_ArkaSoftWare ) };
             String   titre  = getResources( ).getString( R.string.contact_title );
@@ -345,7 +345,7 @@ public class MainActivity extends AppCompatActivity
         compDemandeur = v.getTag( ).toString( );
         Button btHeuresDbt = findViewById( R.id.flight_heure_debut );
         //Contrôle de la difference d'heure cohérente avec les heures saisie
-        if ( !btHeuresDbt.getText( ).toString( ).contains( ":" ) && compDemandeur.equals( "end_hour" ) ) {
+        if( !btHeuresDbt.getText( ).toString( ).contains( ":" ) && compDemandeur.equals( "end_hour" ) ) {
             Snackbar.make( getSupportFragmentManager( ).findFragmentById( R.id.mainFrag ).getView( ),
                            getResources( ).getString( R.string.msg_hours_start_before ),
                            Snackbar.LENGTH_LONG ).show( );
