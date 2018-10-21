@@ -92,11 +92,11 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
             int      minutes;
             
             // Contrôle de saisie
-            if ( ( !heuresJour.contains( ":" ) ) && ( !heuresNuit.contains( ":" ) ) ) {
+            if( ( !heuresJour.contains( ":" ) ) && ( !heuresNuit.contains( ":" ) ) ) {
                 Snackbar.make( rootView, getResources( ).getString( R.string.error_nb_heures ), Snackbar.LENGTH_LONG ).show( );
                 return;
             }
-            if ( !heureDebut.contains( ":" ) ) {
+            if( !heureDebut.contains( ":" ) ) {
                 Snackbar.make( rootView, getResources( ).getString( R.string.error_start_time ), Snackbar.LENGTH_LONG ).show( );
                 return;
             } else {
@@ -112,14 +112,14 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
                 cal.set( Calendar.SECOND, 0 );
                 dateFormmater = String.format( "%4d-%02d-%02d %s:00", year, month, day, heureDebut );
             }
-            if ( !heuresJour.contains( ":" ) ) {
+            if( !heuresJour.contains( ":" ) ) {
                 heuresJour = "00:00";
             } else {
                 String[] heureMinuteJour = heuresJour.split( ":" );
                 cal.add( Calendar.HOUR_OF_DAY, Integer.valueOf( heureMinuteJour[ 0 ] ) );
                 cal.add( Calendar.MINUTE, Integer.valueOf( heureMinuteJour[ 1 ] ) );
             }
-            if ( !heuresNuit.contains( ":" ) ) {
+            if( !heuresNuit.contains( ":" ) ) {
                 heuresNuit = "00:00";
             } else {
                 String[] heureMinuteNuit = heuresNuit.split( ":" );
@@ -135,7 +135,7 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
                                            arriveesIfr,
                                            attJour, attNuit,
                                            obs );
-            if ( isMod ) {
+            if( isMod ) {
                 fdbh.updateFlight( oneFlight, idFlight );
             } else {
                 fdbh.insertFlight( oneFlight );
@@ -229,8 +229,8 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
         
         spinFonction = rootView.findViewById( R.id.fonction );
         int j = spinFonction.getCount( );
-        for ( int i = 0; i < j; i++ ) {
-            if ( spinFonction.getItemAtPosition( i ).toString( ).equals( prefFonction ) ) {
+        for( int i = 0; i < j; i++ ) {
+            if( spinFonction.getItemAtPosition( i ).toString( ).equals( prefFonction ) ) {
                 spinFonction.setSelection( i );
                 break;
             }
@@ -261,7 +261,7 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
         
         // Test de la modification ou non
         bundle = this.getArguments( );
-        if ( bundle != null ) {
+        if( bundle != null ) {
             idFlight = bundle.getInt( "id" );
             enModification( idFlight );
         }
@@ -281,14 +281,14 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
         
         // getWidth de view n'est pas accessible lors de la premiere fois
         int tailleLargeur;
-        if ( v.getWidth( ) == 0 ) {
+        if( v.getWidth( ) == 0 ) {
             tailleLargeur = rootView.getWidth( );
         } else {
             tailleLargeur = v.getWidth( );
         }
         
         int test = v.getVisibility( );
-        if ( test == View.VISIBLE ) {
+        if( test == View.VISIBLE ) {
             TranslateAnimation translateAnimationClose = new TranslateAnimation( 0, tailleLargeur, 0, 0 );
             translateAnimationClose.setDuration( vitesse );
             translateAnimationClose.setAnimationListener( new Animation.AnimationListener( ) {
@@ -307,8 +307,8 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
                 }
             } );
             v.startAnimation( translateAnimationClose );
-            
-        } else if ( test == View.GONE ) {
+        
+        } else if( test == View.GONE ) {
             
             TranslateAnimation translateAnimation = new TranslateAnimation( tailleLargeur, 0, 0, 0 );
             translateAnimation.setDuration( vitesse );
@@ -329,17 +329,17 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
         actTypeAvion.setText( f.getAircraft_type( ) );
         actImmat.setText( f.getAircraft_immat( ) );
         int compteur = spinFonction.getCount( );
-        for ( int i = 0; i < compteur; i++ ) {
-            if ( spinFonction.getItemAtPosition( i ).toString( ).equals( f.getFonction_bord( ) ) ) {
+        for( int i = 0; i < compteur; i++ ) {
+            if( spinFonction.getItemAtPosition( i ).toString( ).equals( f.getFonction_bord( ) ) ) {
                 spinFonction.setSelection( i );
                 break;
             }
         }
-        if ( f.isSimu_vol( ) )
+        if( f.isSimu_vol( ) )
             btSimu.setChecked( true );
-        if ( f.isIfr_vfr( ) )
+        if( f.isIfr_vfr( ) )
             btIfr.setChecked( true );
-        if ( f.isMulti_mono( ) )
+        if( f.isMulti_mono( ) )
             btMulti.setChecked( true );
         actArriveesIfr.setText( f.getArrivees_ifr( ) );
         etObservations.setText( f.getObs( ) );
@@ -363,9 +363,9 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
     @Override
     public void onDialogPositiveClick( DialogFragment dialog, int h, int m ) {
         Button bt = null;
-        if ( isHeureJour ) {
+        if( isHeureJour ) {
             bt = btHeuresDeJour;
-        } else if ( isHeureNuit ) {
+        } else if( isHeureNuit ) {
             bt = btHeuresDeNuit;
         }
         assert bt != null;
