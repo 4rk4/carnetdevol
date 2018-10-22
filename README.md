@@ -1,5 +1,9 @@
 # carnetdevol
 
+## Licence
+
+GPL
+
 ## Description
 
 An Electronic Flight Book for pilot and PNC on android.
