@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity
                    FlightListFragment.OnFragmentInteractionListener,
                    TimePickerDialog.OnTimeSetListener {
     
-    private int            FILE_SELECTED_CODE;
-    private boolean        notify  = false;
-    private String         message = "";
-    private FlightDbHelper fDB;
+    private final int            FILE_SELECTED_CODE = 1;
+    private       boolean        notify             = false;
+    private       String         message            = "";
+    private       FlightDbHelper fDB;
     
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
