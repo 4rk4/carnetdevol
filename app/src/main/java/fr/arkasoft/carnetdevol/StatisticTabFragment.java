@@ -1,17 +1,13 @@
-/**
- * author: 4rk4
- * url: https://github.com/4rk4/carnetdevol
- * Licence: GPL v3
- * Start: 29 oct 2015
- * 1st publish: 06 nov 2015
- */
 package fr.arkasoft.carnetdevol;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.Objects;
 
 public class StatisticTabFragment extends Fragment {
     
@@ -24,11 +20,11 @@ public class StatisticTabFragment extends Fragment {
     }
     
     @Override
-    public View onCreateView( LayoutInflater inflater,
+    public View onCreateView( @NonNull LayoutInflater inflater,
                               ViewGroup container, Bundle savedInstanceState ) {
         View   rootView;
         Bundle args   = getArguments( );
-        int    numVue = args.getInt( "pos" );
+        int    numVue = Objects.requireNonNull( args ).getInt( "pos" );
         int    resId;
         switch( numVue ) {
             case 0:

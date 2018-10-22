@@ -14,8 +14,8 @@ import fr.arkasoft.carnetdevol.R;
 
 public class SettingFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
     
-    public static final String KEY_PREF_DATE_PN  = "prefDatePn";
-    public static final String KEY_PREF_DATE_CIV = "prefDateCertificatMediacal";
+    private static final String KEY_PREF_DATE_PN  = "prefDatePn";
+    private static final String KEY_PREF_DATE_CIV = "prefDateCertificatMediacal";
     
     public SettingFragment( ) {
     }

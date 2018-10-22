@@ -147,6 +147,7 @@
             android:layout_margin="0dp"
             android:background="@drawable/shape_corner_dark_accent_color"
             android:orientation="horizontal"
+            android:baselineAligned="false"
             android:visibility="gone">
 
             <LinearLayout

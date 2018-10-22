@@ -1,13 +1,7 @@
-/**
- * author: 4rk4
- * url: https://github.com/4rk4/carnetdevol
- * Licence: GPL v3
- * Start: 29 oct 2015
- * 1st publish: 06 nov 2015
- */
 package fr.arkasoft.carnetdevol;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -19,7 +13,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import fr.arkasoft.carnetdevol.db.FlightDbHelper;
 import fr.arkasoft.carnetdevol.tool.Cercle;
@@ -27,21 +22,16 @@ import fr.arkasoft.carnetdevol.tool.TypeCercle;
 
 public class StatisticFragment extends Fragment {
     
-    protected Cercle cercleHeures;
-    private   View   v;
-    private   String fonctionSelect;
-    private   int    dateSelect;
+    private Cercle cercleHeures;
+    private View   v;
+    private String fonctionSelect;
+    private int    dateSelect;
     
     public StatisticFragment( ) {
     }
     
     @Override
-    public void onCreate( Bundle savedInstanceState ) {
-        super.onCreate( savedInstanceState );
-    }
-    
-    @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container,
+    public View onCreateView( @NonNull LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState ) {
         
         v = inflater.inflate( R.layout.fragment_statistic, container, false );
@@ -103,21 +93,16 @@ public class StatisticFragment extends Fragment {
         cercleHeures = v.findViewById( R.id.cercleHeures );
     }
     
-    @Override
-    public void onDetach( ) {
-        super.onDetach( );
-    }
-    
-    public void affStat( ) {
+    private void affStat( ) {
         
-        FlightDbHelper db = new FlightDbHelper( getActivity( ).getBaseContext( ) );
+        FlightDbHelper db = new FlightDbHelper( Objects.requireNonNull( getActivity( ) ).getBaseContext( ) );
         
         float heureJour;
         float heureNuit;
         int   attJour;
         int   attNuit;
         
-        HashMap< String, Float > lesHeuresTotal;
+        Map< String, Float > lesHeuresTotal;
     
         switch( dateSelect ) {
             case 0:

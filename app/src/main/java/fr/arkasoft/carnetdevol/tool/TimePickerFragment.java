@@ -1,8 +1,8 @@
 package fr.arkasoft.carnetdevol.tool;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -13,18 +13,16 @@ import java.util.Calendar;
 public class TimePickerFragment extends DialogFragment {
     
     // permet de communiquer avec l'activity parent
-    TimePickerDialog.OnTimeSetListener callback;
+    private TimePickerDialog.OnTimeSetListener callback;
     
     @Override
-    public void onAttach( Activity activity ) {
-        super.onAttach( activity );
+    public void onAttach( Context context ) {
+        super.onAttach( context );
         
-        // This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
         try {
-            callback = ( TimePickerDialog.OnTimeSetListener ) activity;
+            callback = ( TimePickerDialog.OnTimeSetListener ) context;
         } catch( ClassCastException e ) {
-            throw new ClassCastException( activity.toString( )
+            throw new ClassCastException( context.toString( )
                                           + " must implement OnHeadlineSelectedListener" );
         }
     }

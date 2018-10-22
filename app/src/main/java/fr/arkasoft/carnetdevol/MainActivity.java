@@ -1,11 +1,3 @@
-/**
- * author: 4rk4
- * url: https://github.com/4rk4/carnetdevol
- * Licence: GPL v3
- * Start: 29 oct 2015
- * 1st publish: 06 nov 2015
- */
-
 package fr.arkasoft.carnetdevol;
 
 import android.app.Activity;
@@ -44,6 +36,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 import fr.arkasoft.carnetdevol.db.FlightDbHelper;
 import fr.arkasoft.carnetdevol.tool.SettingFragment;
@@ -55,7 +48,6 @@ public class MainActivity extends AppCompatActivity
                    TimePickerDialog.OnTimeSetListener {
     
     private int            FILE_SELECTED_CODE;
-    private String         compDemandeur;
     private boolean        notify  = false;
     private String         message = "";
     private FlightDbHelper fDB;
@@ -169,7 +161,7 @@ public class MainActivity extends AppCompatActivity
                     }
     
                     if( fDB.importFlight( stringBuilder.toString( ) ) > 0 ) {
-                        Snackbar.make( getSupportFragmentManager( ).findFragmentById( R.id.mainFrag ).getView( ),
+                        Snackbar.make( Objects.requireNonNull( getSupportFragmentManager( ).findFragmentById( R.id.mainFrag ) ).getView( ),
                                        getResources( ).getString( R.string.msg_import ),
                                        Snackbar.LENGTH_LONG ).show( );
                     }
@@ -217,8 +209,8 @@ public class MainActivity extends AppCompatActivity
         if( id == R.id.action_settings ) {
             getSupportFragmentManager( )
                     .beginTransaction( )
-                    .remove( getSupportFragmentManager( )
-                                     .findFragmentById( R.id.mainFrag ) )
+                    .remove( Objects.requireNonNull( getSupportFragmentManager( )
+                                                             .findFragmentById( R.id.mainFrag ) ) )
                     .commit( );
             getFragmentManager( )
                     .beginTransaction( )
@@ -229,7 +221,7 @@ public class MainActivity extends AppCompatActivity
     
         if( id == R.id.action_export ) {
             if( fDB.export( ) ) {
-                Snackbar.make( getSupportFragmentManager( ).findFragmentById( R.id.mainFrag ).getView( ),
+                Snackbar.make( Objects.requireNonNull( getSupportFragmentManager( ).findFragmentById( R.id.mainFrag ) ).getView( ),
                                getResources( ).getString( R.string.msg_export ),
                                Snackbar.LENGTH_LONG ).show( );
             }
@@ -252,7 +244,7 @@ public class MainActivity extends AppCompatActivity
                        fDB.deleteAllFlight( );
                        getSupportFragmentManager( )
                                .beginTransaction( )
-                               .remove( getSupportFragmentManager( ).findFragmentById( R.id.mainFrag ) )
+                               .remove( Objects.requireNonNull( getSupportFragmentManager( ).findFragmentById( R.id.mainFrag ) ) )
                                .replace( R.id.mainFrag, new FlightListFragment( ) )
                                .setTransition( FragmentTransaction.TRANSIT_FRAGMENT_FADE )
                                .commit( );
@@ -337,16 +329,12 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
     
-    @Override
-    public void onFragmentInteraction( String id ) {
-    }
-    
     public void showTimePickerDialog( View v ) {
-        compDemandeur = v.getTag( ).toString( );
-        Button btHeuresDbt = findViewById( R.id.flight_heure_debut );
+        String compDemandeur = v.getTag( ).toString( );
+        Button btHeuresDbt   = findViewById( R.id.flight_heure_debut );
         //Contrôle de la difference d'heure cohérente avec les heures saisie
         if( !btHeuresDbt.getText( ).toString( ).contains( ":" ) && compDemandeur.equals( "end_hour" ) ) {
-            Snackbar.make( getSupportFragmentManager( ).findFragmentById( R.id.mainFrag ).getView( ),
+            Snackbar.make( Objects.requireNonNull( getSupportFragmentManager( ).findFragmentById( R.id.mainFrag ) ).getView( ),
                            getResources( ).getString( R.string.msg_hours_start_before ),
                            Snackbar.LENGTH_LONG ).show( );
             
@@ -358,7 +346,7 @@ public class MainActivity extends AppCompatActivity
     
     @Override
     public void onTimeSet( TimePicker timePicker, int hour, int minute ) {
-        Button bt = getSupportFragmentManager( ).findFragmentById( R.id.mainFrag ).getView( ).findViewById( R.id.flight_heure_debut );
+        Button bt = Objects.requireNonNull( getSupportFragmentManager( ).findFragmentById( R.id.mainFrag ).getView( ) ).findViewById( R.id.flight_heure_debut );
         bt.setText( String.format( "%02d:%02d", hour, minute ) );
     }
 }

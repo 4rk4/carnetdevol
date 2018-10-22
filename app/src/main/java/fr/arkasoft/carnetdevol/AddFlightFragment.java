@@ -1,16 +1,10 @@
-/**
- * author: 4rk4
- * url: https://github.com/4rk4/carnetdevol
- * Licence: GPL v3
- * Start: 29 oct 2015
- * 1st publish: 06 nov 2015
- */
 package fr.arkasoft.carnetdevol;
 
 import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
@@ -34,6 +28,7 @@ import android.widget.Switch;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 import fr.arkasoft.carnetdevol.db.Flight;
 import fr.arkasoft.carnetdevol.db.FlightDbHelper;
@@ -42,29 +37,24 @@ import fr.arkasoft.carnetdevol.tool.NumberPickerFragment;
 
 public class AddFlightFragment extends Fragment implements NumberPickerFragment.OnValidateListener, DatePickerDialog.OnDateSetListener {
     
-    private View                 rootView;
-    private boolean              isHeureNuit  = false;
-    private boolean              isHeureJour  = false;
-    private boolean              isMod;
-    private int                  idFlight;
-    private FlightDbHelper       fdbh;
-    private AutoCompleteTextView actNatureVol;
-    private AutoCompleteTextView actTypeAvion;
-    private AutoCompleteTextView actImmat;
-    private AutoCompleteTextView actArriveesIfr;
-    private Button               btAddOneFlight;
-    private Button               btDate;
-    private Button               btHeureDebut;
-    private Button               btHeuresDeJour;
-    private Button               btHeuresDeNuit;
-    private NumberPicker         npAttDeJour;
-    private NumberPicker         npAttDeNuit;
-    private Button               btOngletAtt;
-    private Button               btOngletDivers;
-    private Button               btOngletIfr;
-    private Spinner              spinFonction;
-    private Calendar             cal;
-    public  View.OnClickListener addOneFlight = new View.OnClickListener( ) {
+    private       View                 rootView;
+    private       boolean              isHeureNuit  = false;
+    private       boolean              isHeureJour  = false;
+    private       boolean              isMod;
+    private       int                  idFlight;
+    private       FlightDbHelper       fdbh;
+    private       AutoCompleteTextView actNatureVol;
+    private       AutoCompleteTextView actTypeAvion;
+    private       AutoCompleteTextView actImmat;
+    private       AutoCompleteTextView actArriveesIfr;
+    private       Button               btDate;
+    private       Button               btHeureDebut;
+    private       Button               btHeuresDeJour;
+    private       Button               btHeuresDeNuit;
+    private       NumberPicker         npAttDeJour;
+    private       NumberPicker         npAttDeNuit;
+    private       Spinner              spinFonction;
+    private final View.OnClickListener addOneFlight = new View.OnClickListener( ) {
         
         @Override
         public void onClick( View view ) {
@@ -96,6 +86,7 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
                 Snackbar.make( rootView, getResources( ).getString( R.string.error_nb_heures ), Snackbar.LENGTH_LONG ).show( );
                 return;
             }
+            Calendar cal;
             if( !heureDebut.contains( ":" ) ) {
                 Snackbar.make( rootView, getResources( ).getString( R.string.error_start_time ), Snackbar.LENGTH_LONG ).show( );
                 return;
@@ -145,22 +136,16 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
             Snackbar.make( rootView, getResources( ).getString( R.string.msg_save_flight ), Snackbar.LENGTH_LONG ).show( );
         }
     };
-    private Switch               btIfr;
-    private Switch               btSimu;
-    private Switch               btMulti;
-    private EditText             etObservations;
-    private Bundle               bundle;
+    private       Switch               btIfr;
+    private       Switch               btSimu;
+    private       Switch               btMulti;
+    private       EditText             etObservations;
     
     public AddFlightFragment( ) {
     }
     
     @Override
-    public void onCreate( Bundle savedInstanceState ) {
-        super.onCreate( savedInstanceState );
-    }
-    
-    @Override
-    public View onCreateView( final LayoutInflater inflater, ViewGroup container,
+    public View onCreateView( @NonNull final LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState ) {
         rootView = inflater.inflate( R.layout.fragment_add_flight, container, false );
         
@@ -174,15 +159,11 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
         etObservations = rootView.findViewById( R.id.observation );
         
         btHeuresDeJour = rootView.findViewById( R.id.jour );
-        btHeuresDeJour.setOnClickListener( new View.OnClickListener( ) {
-            
-            @Override
-            public void onClick( View view ) {
-                showNumberPickerDialog( "heureDeJour" );
-                // Pour ouvrir le numberpicker fonction de nuit ou jour
-                isHeureJour = true;
-                isHeureNuit = false;
-            }
+        btHeuresDeJour.setOnClickListener( view -> {
+            showNumberPickerDialog( "heureDeJour" );
+            // Pour ouvrir le numberpicker fonction de nuit ou jour
+            isHeureJour = true;
+            isHeureNuit = false;
         } );
         
         btHeuresDeNuit = rootView.findViewById( R.id.nuit );
@@ -202,20 +183,20 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
         
         npAttDeNuit = rootView.findViewById( R.id.attNuit );
         npAttDeNuit.setMaxValue( 20 );
-        
-        btOngletAtt = rootView.findViewById( R.id.titleOngletAtt );
+    
+        Button btOngletAtt = rootView.findViewById( R.id.titleOngletAtt );
         btOngletAtt.setOnClickListener( view -> {
             LinearLayout onglet = rootView.findViewById( R.id.ongletAtt );
             annimationDesOnglets( onglet );
         } );
-        
-        btOngletDivers = rootView.findViewById( R.id.titleOngletDiver );
+    
+        Button btOngletDivers = rootView.findViewById( R.id.titleOngletDiver );
         btOngletDivers.setOnClickListener( view -> {
             LinearLayout onglet = rootView.findViewById( R.id.ongletDivers );
             annimationDesOnglets( onglet );
         } );
-        
-        btOngletIfr = rootView.findViewById( R.id.titleOngletIfr );
+    
+        Button btOngletIfr = rootView.findViewById( R.id.titleOngletIfr );
         btOngletIfr.setOnClickListener( view -> {
             LinearLayout onglet = rootView.findViewById( R.id.ongletIfr );
             annimationDesOnglets( onglet );
@@ -224,7 +205,7 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
         btDate = rootView.findViewById( ( R.id.flight_date ) );
         btDate.setOnClickListener( view -> {
             DatePickerFragment datePickerFragment = new DatePickerFragment( );
-            datePickerFragment.show( getActivity( ).getSupportFragmentManager( ), "datePicker" );
+            datePickerFragment.show( Objects.requireNonNull( getActivity( ) ).getSupportFragmentManager( ), "datePicker" );
         } );
         
         spinFonction = rootView.findViewById( R.id.fonction );
@@ -260,22 +241,22 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
         btDate.setText( formatDate.format( dateDuJour.getTime( ) ) );
         
         // Test de la modification ou non
-        bundle = this.getArguments( );
+        Bundle bundle = this.getArguments( );
         if( bundle != null ) {
             idFlight = bundle.getInt( "id" );
             enModification( idFlight );
         }
-        btAddOneFlight = rootView.findViewById( R.id.addOneFlight );
+        Button btAddOneFlight = rootView.findViewById( R.id.addOneFlight );
         btAddOneFlight.setOnClickListener( addOneFlight );
         return rootView;
     }
     
-    public void showNumberPickerDialog( String demandeur ) {
+    private void showNumberPickerDialog( String demandeur ) {
         DialogFragment newFragment = new NumberPickerFragment( );
-        newFragment.show( getActivity( ).getSupportFragmentManager( ), demandeur );
+        newFragment.show( Objects.requireNonNull( getActivity( ) ).getSupportFragmentManager( ), demandeur );
     }
     
-    public void annimationDesOnglets( final View v ) {
+    private void annimationDesOnglets( final View v ) {
         v.clearAnimation( );
         int vitesse = 300;
         
@@ -353,11 +334,6 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
         super.onActivityCreated( savedInstanceState );
         ( ( AppCompatActivity ) getActivity( ) ).getSupportActionBar( ).setSubtitle( R.string.act_main_drawer_add );
         ( ( AppCompatActivity ) getActivity( ) ).getSupportActionBar( ).setTitle( R.string.nav_header_main_app_name );
-    }
-    
-    @Override
-    public void onDetach( ) {
-        super.onDetach( );
     }
     
     @Override

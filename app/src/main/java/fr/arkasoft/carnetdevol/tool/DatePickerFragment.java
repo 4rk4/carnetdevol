@@ -8,18 +8,19 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 import fr.arkasoft.carnetdevol.R;
 
 public class DatePickerFragment extends DialogFragment {
     
-    DatePickerDialog.OnDateSetListener callback;
+    private DatePickerDialog.OnDateSetListener callback;
     
     public void onAttach( Activity activity ) {
         super.onAttach( activity );
         
         try {
-            callback = ( DatePickerDialog.OnDateSetListener ) getActivity( ).getSupportFragmentManager( ).findFragmentById( R.id.mainFrag );
+            callback = ( DatePickerDialog.OnDateSetListener ) Objects.requireNonNull( getActivity( ) ).getSupportFragmentManager( ).findFragmentById( R.id.mainFrag );
         } catch( ClassCastException e ) {
             throw new ClassCastException( activity.toString( )
                                           + " must implement OnDateSetListener" );

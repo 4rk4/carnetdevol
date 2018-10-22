@@ -1,13 +1,7 @@
-/**
- * author: 4rk4
- * url: https://github.com/4rk4/carnetdevol
- * Licence: GPL v3
- * Start: 29 oct 2015
- * 1st publish: 06 nov 2015
- */
 package fr.arkasoft.carnetdevol;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -25,17 +19,9 @@ import fr.arkasoft.carnetdevol.tool.ListFlightAdapter;
 public class FlightListFragment extends Fragment {
     
     private FlightDbHelper             flightDb;
-    private RecyclerView               mListView;
-    private RecyclerView.Adapter       mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     
     @Override
-    public void onCreate( Bundle savedInstanceState ) {
-        super.onCreate( savedInstanceState );
-    }
-    
-    @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container,
+    public View onCreateView( @NonNull LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState ) {
         final View view = inflater.inflate( R.layout.fragment_flight_list, null );
         
@@ -44,14 +30,14 @@ public class FlightListFragment extends Fragment {
         if( flightDb.getAllFlight( ).isEmpty( ) ) {
             Snackbar.make( view, getResources( ).getString( R.string.error_empty_db ), Snackbar.LENGTH_LONG ).show( );
         }
-        
-        mListView = view.findViewById( R.id.listAllFlight );
+    
+        RecyclerView mListView = view.findViewById( R.id.listAllFlight );
         mListView.setHasFixedSize( true );
-        
-        mLayoutManager = new LinearLayoutManager( getActivity( ) );
+    
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager( getActivity( ) );
         mListView.setLayoutManager( mLayoutManager );
-        
-        mAdapter = new ListFlightAdapter( getActivity( ), flightDb.getAllFlight( ) );
+    
+        RecyclerView.Adapter mAdapter = new ListFlightAdapter( getActivity( ), flightDb.getAllFlight( ) );
         mListView.setAdapter( mAdapter );
         
         TextView tvNbFlight = view.findViewById( R.id.nbFlight );
@@ -61,12 +47,6 @@ public class FlightListFragment extends Fragment {
                         flightDb.getNumberOfFlight( ) ) );
         
         return view;
-    }
-    
-    @Override
-    public void onViewCreated( View view, @Nullable Bundle savedInstanceState ) {
-        super.onViewCreated( view, savedInstanceState );
-        
     }
     
     @SuppressWarnings( "ConstantConditions" )
@@ -84,8 +64,7 @@ public class FlightListFragment extends Fragment {
     }
     
     public interface OnFragmentInteractionListener {
-        
-        void onFragmentInteraction( String id );
+    
     }
     
 }

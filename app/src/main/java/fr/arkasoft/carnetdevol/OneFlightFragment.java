@@ -1,14 +1,8 @@
-/**
- * author: 4rk4
- * url: https://github.com/4rk4/carnetdevol
- * Licence: GPL v3
- * Start: 29 oct 2015
- * 1st publish: 06 nov 2015
- */
 package fr.arkasoft.carnetdevol;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -43,7 +37,7 @@ public class OneFlightFragment extends Fragment {
     }
     
     @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container,
+    public View onCreateView( @NonNull LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState ) {
         
         View                 v        = inflater.inflate( R.layout.fragment_one_flight, container, false );
@@ -72,8 +66,4 @@ public class OneFlightFragment extends Fragment {
         return v;
     }
     
-    @Override
-    public void onDetach( ) {
-        super.onDetach( );
-    }
 }

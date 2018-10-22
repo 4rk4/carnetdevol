@@ -27,33 +27,32 @@ import fr.arkasoft.carnetdevol.R;
 
 public class FlightDbHelper extends SQLiteOpenHelper {
     
-    public static final int    STAT_TOTAL          = 1;
-    public static final int    STAT_MOIS_EN_COURS  = 2;
-    public static final int    STAT_ANNEE_EN_COURS = 3;
-    public static final int    DATABASE_VERSION    = 1;
-    public static final String DATABASE_NAME       = "CarnetDeVol.db";
+    public static final  int    STAT_TOTAL          = 1;
+    public static final  int    STAT_MOIS_EN_COURS  = 2;
+    public static final  int    STAT_ANNEE_EN_COURS = 3;
+    public static final  String DATABASE_NAME       = "CarnetDeVol.db";
+    private static final int    DATABASE_VERSION    = 1;
+    private final        String TABLE_NAME          = "flight";
+    private final        String COL_ID              = "id";
+    private final        String COL_DATE            = "date";
+    private final        String COL_HEURE_DEBUT     = "heure_debut";
+    private final        String COL_HEURE_FIN       = "heure_fin";
+    private final        String COL_AIRCRAFT_TYPE   = "aircraft_type";
+    private final        String COL_AIRCRAFT_IMMAT  = "aircraft_immat";
+    private final        String COL_FONCTION_BORD   = "fonction_bord"; //PIL - CDT - EP
+    private final        String COL_NATURE_VOL      = "nature"; //VFR - IFR - Local - Ent
+    private final        String COL_HEURES_JOUR     = "heures_jour";
+    private final        String COL_HEURES_NUIT     = "heures_nuit";
+    private final        String COL_MULTI_MONO      = "multi_mono";
+    private final        String COL_IFR_VFR         = "ifr_vfr";
+    private final        String COL_SIMU_VOL        = "simu_vol";
+    private final        String COL_ARRIVEES_IFR    = "arrivees_ifr";
+    private final        String COL_ATT_JOUR        = "att_jour";
+    private final        String COL_ATT_NUIT        = "att_nuit";
+    private final        String COL_OBS             = "observation";
     
-    protected final String TABLE_NAME         = "flight";
-    protected final String COL_ID             = "id";
-    protected final String COL_DATE           = "date";
-    protected final String COL_HEURE_DEBUT    = "heure_debut";
-    protected final String COL_HEURE_FIN      = "heure_fin";
-    protected final String COL_AIRCRAFT_TYPE  = "aircraft_type";
-    protected final String COL_AIRCRAFT_IMMAT = "aircraft_immat";
-    protected final String COL_FONCTION_BORD  = "fonction_bord"; //PIL - CDT - EP
-    protected final String COL_NATURE_VOL     = "nature"; //VFR - IFR - Local - Ent
-    protected final String COL_HEURES_JOUR    = "heures_jour";
-    protected final String COL_HEURES_NUIT    = "heures_nuit";
-    protected final String COL_MULTI_MONO     = "multi_mono";
-    protected final String COL_IFR_VFR        = "ifr_vfr";
-    protected final String COL_SIMU_VOL       = "simu_vol";
-    protected final String COL_ARRIVEES_IFR   = "arrivees_ifr";
-    protected final String COL_ATT_JOUR       = "att_jour";
-    protected final String COL_ATT_NUIT       = "att_nuit";
-    protected final String COL_OBS            = "observation";
-    
-    private Context        context;
-    private SQLiteDatabase db;
+    private final Context        context;
+    private       SQLiteDatabase db;
     
     public FlightDbHelper( Context context ) {
         super( context, DATABASE_NAME, null, DATABASE_VERSION );
@@ -61,7 +60,6 @@ public class FlightDbHelper extends SQLiteOpenHelper {
     }
     
     public static String formatDateAffichage( String dateToShow ) {
-        //Reformattage de la date pour affichage
         String           dateOut = "";
         SimpleDateFormat sdfOut  = new SimpleDateFormat( "dd/MM/yyyy HH:mm" );
         SimpleDateFormat sdfIn   = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
@@ -75,7 +73,6 @@ public class FlightDbHelper extends SQLiteOpenHelper {
     }
     
     public static String formatOnlyDateAffichage( String dateToShow ) {
-        //Reformattage de la date pour affichage
         String           dateOut = "";
         SimpleDateFormat sdfOut  = new SimpleDateFormat( "dd/MM/yyyy" );
         SimpleDateFormat sdfIn   = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
@@ -154,15 +151,10 @@ public class FlightDbHelper extends SQLiteOpenHelper {
                            );
         c.moveToFirst( );
         
-        //String dbHeuresJour = c.getString(c.getColumnIndexOrThrow(COL_HEURES_JOUR));
-        //String dbHeuresNuit = c.getString(c.getColumnIndexOrThrow(COL_HEURES_NUIT));
-        //String dbDate = c.getString(c.getColumnIndexOrThrow(COL_DATE));
         boolean multi = true;
         boolean ifr   = true;
         boolean simu  = true;
-        //String test = String.valueOf(c.getColumnIndexOrThrow(COL_MULTI_MONO));
-        //String test1 = String.valueOf(c.getColumnIndexOrThrow(COL_IFR_VFR));
-        //String test2 = String.valueOf(c.getColumnIndexOrThrow(COL_SIMU_VOL));
+    
         if( c.getInt( c.getColumnIndexOrThrow( COL_MULTI_MONO ) ) == 0 ) {
             multi = false;
         }
@@ -196,7 +188,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         return flight;
     }
     
-    public String affFonction( String fonc ) {
+    private String affFonction( String fonc ) {
         if( fonc.length( ) < 2 ) {
             String[] fonctions = this.context.getResources( ).getStringArray( R.array.fonction_bord );
             return fonctions[ Integer.valueOf( fonc ) ];
@@ -205,7 +197,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         }
     }
     
-    public long updateFlight( Flight flight, int idFlight ) {
+    public void updateFlight( Flight flight, int idFlight ) {
         // Gets the data repository in write mode
         db = getWritableDatabase( );
         
@@ -239,29 +231,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
                 null );
         db.close( );
         
-        return newRowId;
     }
-    //
-    //    private String replaceLanguageFunction(String laFonctionATraduire) {
-    //        // Garder les chaînes de texte pour rétrocompatibilitée
-    //        String functionTraduite;
-    //        if (laFonctionATraduire.equalsIgnoreCase("Captain")) {
-    //            functionTraduite = "Commandant de bord";
-    //        } else if (laFonctionATraduire.equalsIgnoreCase("Pilot")) {
-    //            functionTraduite = "Pilote";
-    //        } else if (laFonctionATraduire.equalsIgnoreCase("Copilot")) {
-    //            functionTraduite = "Copilote";
-    //        } else if (laFonctionATraduire.equalsIgnoreCase("Crew membre")) {
-    //            functionTraduite = "Membre d\'équipage";
-    //        } else if (laFonctionATraduire.equalsIgnoreCase("PUT")) {
-    //            functionTraduite = "Elève pilote";
-    //        } else if (laFonctionATraduire.equalsIgnoreCase("Instructor")) {
-    //            functionTraduite = "Instructeur";
-    //        } else {
-    //            functionTraduite = laFonctionATraduire;
-    //        }
-    //        return functionTraduite;
-    //    }
     
     public ArrayList< Flight > getAllFlight( ) {
         ArrayList< Flight > ensembleDesVols = new ArrayList<>( );
@@ -291,7 +261,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         return ensembleDesVols;
     }
     
-    public HashMap< String, Float > getStatVol( int TYPE_STAT, String functionSelect ) {
+    public HashMap getStatVol( int TYPE_STAT, String functionSelect ) {
         
         db = getReadableDatabase( );
         
@@ -309,7 +279,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
                 COL_ATT_NUIT,
                 COL_FONCTION_BORD
         };
-    
+        
         switch( TYPE_STAT ) {
             case STAT_MOIS_EN_COURS:
                 where = " strftime('%m', " + COL_DATE + ") = '" + currentMonthFormat
@@ -370,7 +340,6 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         c.close( );
         db.close( );
         return lesStats;
-        //traitement pour le calcul des heures total
     }
     
     public long importFlight( String carnet ) {
@@ -407,26 +376,6 @@ public class FlightDbHelper extends SQLiteOpenHelper {
     public long insertFlight( Flight flight ) {
         // Gets the data repository in write mode
         db = getWritableDatabase( );
-        
-        //Formatage de la date pour le stockage
-        // Ne pas oublier -1 a month car en java janvier commence a 0
-        //        String[] ladate = flight.getDate().split("/");
-        //        String[] lHeureDebut = flight.getHeureDebut().split(":");
-        //        DateFormat sdf;
-        //        String dateFormater;
-        //        if (ladate.length > 1) {
-        //            int month = Integer.valueOf(ladate[1]) - 1;
-        //            Calendar cal = new GregorianCalendar();
-        //            cal.set(Calendar.YEAR, Integer.valueOf(ladate[2]));
-        //            cal.set(Calendar.MONTH, month);
-        //            cal.set(Calendar.DAY_OF_MONTH, Integer.valueOf(ladate[0]));
-        //            cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(lHeureDebut[0]));
-        //            cal.set(Calendar.MINUTE, Integer.parseInt(lHeureDebut[1]));
-        //            sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //            dateFormater = sdf.format(cal.getTime());
-        //        } else {
-        //            dateFormater = flight.getDate();
-        //        }
         
         //Formattage des champs vide
         if( flight.getObs( ).equalsIgnoreCase( "" ) ) {
@@ -706,30 +655,13 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         return tab;
     }
     
-    //    public static String formatDateEnregistrement(String dateToSave){
-    //        //Reformattage de la date pour enregistrement
-    //        String dateOut = "";
-    //        SimpleDateFormat sdfIn = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-    //        SimpleDateFormat sdfOut = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    //        try {
-    //            Date date = sdfIn.parse(dateToSave);
-    //            dateOut = sdfOut.format(date);
-    //        } catch (Exception e) {
-    //            e.printStackTrace();
-    //        }
-    //        return dateOut;
-    //    }
-    
-    public boolean deleteAllFlight( ) {
+    public void deleteAllFlight( ) {
         db = getWritableDatabase( );
         boolean res = db.delete( TABLE_NAME, null, null ) > 0;
         db.close( );
-        return res;
     }
     
     public String toString( ) {
-        
-        //        ArrayList<Flight> ensembleDesVols = new ArrayList<>();
         
         db = getReadableDatabase( );
         Cursor c = db.rawQuery( "SELECT * FROM flight ORDER BY datetime(" + COL_DATE + ") DESC;", null );

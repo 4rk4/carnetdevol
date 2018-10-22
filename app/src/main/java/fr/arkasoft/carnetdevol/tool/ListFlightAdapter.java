@@ -1,6 +1,7 @@
 package fr.arkasoft.carnetdevol.tool;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,8 +18,8 @@ import fr.arkasoft.carnetdevol.db.FlightDbHelper;
 
 public class ListFlightAdapter extends RecyclerView.Adapter< ListFlightAdapter.ViewHolder > {
     
-    protected Context             context;
-    private   ArrayList< Flight > flights;
+    private final Context             context;
+    private final ArrayList< Flight > flights;
     
     public ListFlightAdapter( Context context, ArrayList< Flight > flights ) {
         this.context = context;
@@ -26,18 +27,18 @@ public class ListFlightAdapter extends RecyclerView.Adapter< ListFlightAdapter.V
     }
     
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder( ViewGroup parent, int viewType ) {
+    public ViewHolder onCreateViewHolder( @NonNull ViewGroup parent, int viewType ) {
         // create a new view
         View v = LayoutInflater.from( parent.getContext( ) )
                                .inflate( R.layout.listview_items, parent, false );
-        ViewHolder vh = new ViewHolder( v, this.context );
-        return vh;
+        return new ViewHolder( v, this.context );
     }
     
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder( ViewHolder holder, int position ) {
+    public void onBindViewHolder( @NonNull ViewHolder holder, int position ) {
         holder.display( flights.get( position ) );
     }
     
@@ -47,18 +48,17 @@ public class ListFlightAdapter extends RecyclerView.Adapter< ListFlightAdapter.V
     }
     
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        
-        protected final Context  mContext;
+    
+        final Context  mContext;
         // each data item is just a string in this case
-        public          TextView mTextViewDate;
-        public          TextView mTextViewHeureJour;
-        public          TextView mTextViewHeureNuit;
-        public          TextView mTextViewAvion;
-        public          TextView mTextViewImmat;
-        public          TextView mTextViewNature;
-        private         Flight   mFlight;
-        
-        public ViewHolder( final View v, Context context ) {
+        final TextView mTextViewDate;
+        final TextView mTextViewHeureJour;
+        final TextView mTextViewHeureNuit;
+        final TextView mTextViewAvion;
+        final TextView mTextViewImmat;
+        final TextView mTextViewNature;
+    
+        ViewHolder( final View v, Context context ) {
             super( v );
             this.mContext = context;
             mTextViewDate = v.findViewById( R.id.itemDate );
@@ -67,23 +67,18 @@ public class ListFlightAdapter extends RecyclerView.Adapter< ListFlightAdapter.V
             mTextViewNature = v.findViewById( R.id.itemNature );
             mTextViewAvion = v.findViewById( R.id.itemAvion );
             mTextViewImmat = v.findViewById( R.id.itemImat );
-            
-            v.setOnClickListener( new View.OnClickListener( ) {
-                
-                @Override
-                public void onClick( View view ) {
-                    int tagDate = ( int ) ( view.findViewById( R.id.itemDate ) ).getTag( );
-                    ( ( AppCompatActivity ) mContext ).getSupportFragmentManager( )
-                                                      .beginTransaction( )
-                                                      .replace( R.id.mainFrag, new OneFlightFragment( ).newInstance( tagDate ) )
-                                                      .addToBackStack( "listeDesVols" )
-                                                      .commit( );
-                }
+        
+            v.setOnClickListener( view -> {
+                int tagDate = ( int ) ( view.findViewById( R.id.itemDate ) ).getTag( );
+                ( ( AppCompatActivity ) mContext ).getSupportFragmentManager( )
+                                                  .beginTransaction( )
+                                                  .replace( R.id.mainFrag, OneFlightFragment.newInstance( tagDate ) )
+                                                  .addToBackStack( "listeDesVols" )
+                                                  .commit( );
             } );
         }
-        
-        public void display( Flight f ) {
-            this.mFlight = f;
+    
+        void display( Flight f ) {
             mTextViewDate.setText( String.valueOf( FlightDbHelper.formatDateAffichage( f.getDate( ) ) ) );
             //Dans le tag de la date on cachera l'ID en DB du vol
             mTextViewDate.setTag( f.getId( ) );

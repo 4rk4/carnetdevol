@@ -1,10 +1,3 @@
-/**
- * author: 4rk4
- * url: https://github.com/4rk4/carnetdevol
- * Licence: GPL v3
- * Start: 29 oct 2015
- * 1st publish: 06 nov 2015
- */
 package fr.arkasoft.carnetdevol;
 
 import android.content.Context;
@@ -12,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-public class StatisticPagerAdapter extends FragmentStatePagerAdapter {
+class StatisticPagerAdapter extends FragmentStatePagerAdapter {
     
     private final Context context;
     
