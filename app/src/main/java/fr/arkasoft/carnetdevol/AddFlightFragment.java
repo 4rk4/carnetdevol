@@ -337,7 +337,7 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
     }
     
     @Override
-    public void onDialogPositiveClick( DialogFragment dialog, int h, int m ) {
+    public void onDialogPositiveClick( int h, int m ) {
         Button bt = null;
         if( isHeureJour ) {
             bt = btHeuresDeJour;

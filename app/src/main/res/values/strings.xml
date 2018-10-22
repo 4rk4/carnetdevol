@@ -10,7 +10,6 @@
 
     <string name="frag_add_flight_date">DATE DU VOL</string>
     <string name="frag_add_flight_start_hour">Heure de début</string>
-    <string name="frag_add_flight_end_hour">Heure de fin</string>
     <string name="frag_add_flight_hdv_jour">HDV jour</string>
     <string name="frag_add_flight_hdv_nuit">HDV nuit</string>
     <string name="frag_add_flight_function">Fonction à bord</string>
@@ -27,13 +26,11 @@
     <string name="frag_add_flight_att_day">ATT de jour</string>
     <string name="frag_add_flight_att_night">ATT de nuit</string>
     <string name="frag_add_flight_save">Sauvegarder</string>
-    <string name="frag_add_flight_tab_aircraft">Votre avion</string>
     <string name="frag_add_flight_tab_various">Divers</string>
     <string name="frag_number_picker_title">HDV de JOUR</string>
     <string name="frag_number_picker_duration_hour">Heures</string>
     <string name="frag_number_picker_duration_minute">Minutes</string>
     <string name="frag_one_flight_delete">Supprimer</string>
-    <string name="frag_statistic_duration_hours">HDV Totale: %1$.1f avec %2$.1f de jour et %3$.1f de nuit. Avec <b>%4$.0f</b> vol effectués.</string>
     <string name="frag_statistic_att">ATT</string>
     <string name="nav_header_main_logo" translatable="false">Logo</string>
     <string name="nav_header_main_app_name">ASW/Carnet de vol</string>
@@ -52,7 +49,6 @@
     <string name="act_main_drawer_communicate">Communiquer</string>
     <string name="act_main_drawer_contact">L\'auteur</string>
     <string name="act_main_action_settings">Paramètres</string>
-    <string name="error_date">Erreur de date.</string>
     <string name="error_nb_heures">Entrez des heures de vol.</string>
     <string name="msg_save_flight">Vol enregistré.</string>
     <string name="msg_cancel">Annuler</string>
@@ -63,16 +59,10 @@
     <string name="rappel_medical">Visite médicale</string>
     <string name="navigation_drawer_open">Ouvrir le menu</string>
     <string name="navigation_drawer_close">Fermer le menu</string>
-    <string name="msg_quit">Quitter</string>
     <string name="contact_title">Titre</string>
     <string name="contact_email_ArkaSoftWare" translatable="false">fr.arka.soft@gmail.com</string>
     <string name="contact_subject">Sujet</string>
-    <string name="msg_minute">minute(s)</string>
-    <string name="msg_heure">heure(s)</string>
-    <string name="msg_controleTemps">Temps total de </string>
     <string name="frag_one_flight_date">Vol du </string>
-    <string name="frag_one_flight_function">Fonction</string>
-    <string name="frag_one_flight_hour">Heures</string>
     <string name="frag_one_flight_hour_night">HDV de nuit</string>
     <string name="frag_one_flight_hour_day">HDV de jour</string>
     <string name="frag_one_flight_nature" translatable="false">Nature: </string>
@@ -85,11 +75,8 @@
     <string name="frag_one_flight_simu" translatable="false">Simulation</string>
     <string name="frag_one_flight_att_night">ATT de nuit</string>
     <string name="frag_one_flight_att_day">ATT de jour</string>
-    <string name="frag_statistic_month">Mois</string>
-    <string name="frag_statistic_years">Années</string>
-    <string name="frag_statistic_error">Aucune HDV enregistré.</string>
-    <string name="frag_statistic_day">HDV de jour %1$dh</string>
-    <string name="frag_statistic_night">HDV de nuit %1$dh</string>
+    <string name="frag_statistic_day">Jour %1$dh</string>
+    <string name="frag_statistic_night">Nuit %1$dh</string>
     <string name="frag_list_day">HDV de JOUR</string>
     <string name="frag_list_night">HDV de NUIT</string>
     <string name="msg_hours_start_before" translatable="false">Saisir l\'heure de début en premier.</string>
@@ -99,10 +86,7 @@
     <string name="dialog_delete_cancel">Annuler</string>
     <string name="frag_one_flight_mod">Modifier</string>
     <string name="frag_list_nb_flight">%d vols enregistrés</string>
-    <string name="frag_statistic_error_att">Aucun ATT enregistré.</string>
     <string name="frag_statistic_repart_hdv">Répartition des HDV</string>
-    <string name="frag_statistic_duration_att">ATT tolal: %1$d avec %2$d de jour et %3$d de nuit.</string>
-    <string name="frag_statistic_error_att_and_hdv">Aucune HDV ou ATT.</string>
     <string name="act_main_action_export">Exporter le carnet de vol</string>
     <string name="msg_export">Carnet de vol exporté!</string>
     <string name="flight_db_help_export_name" translatable="false">carnet_de_vol.xml</string>

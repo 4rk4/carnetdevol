@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity
         }
         if( notify ) {
             NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder( this )
+                    new NotificationCompat.Builder( this, "chanel1" )
                             .setSmallIcon( R.drawable.ic_flight )
                             .setContentTitle( message )
                             .setContentText( datePn );

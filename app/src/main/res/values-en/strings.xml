@@ -12,7 +12,6 @@
 
     <string name="frag_add_flight_date">Flight date</string>
     <string name="frag_add_flight_start_hour">Start time</string>
-    <string name="frag_add_flight_end_hour">End time</string>
     <string name="frag_add_flight_type">Type</string>
     <string name="nav_header_main_app_name">ASW/Flight Log Book</string>
     <string name="frag_pref_age">age</string>
@@ -30,23 +29,16 @@
     <string name="dialog_delete_ok">Delete</string>
     <string name="dialog_delete_title">Deleted.</string>
     <string name="dialog_mesg_delete">Are you sur to want to remove this flight?</string>
-    <string name="error_date">Error on the date.</string>
     <string name="error_empty_db">Nothing to display.</string>
     <string name="error_nb_heures">Enter flight hours.</string>
     <string name="frag_add_flight_att_day">LND day</string>
     <string name="frag_add_flight_att_night">LND night</string>
     <string name="frag_add_flight_att">LANDING</string>
     <string name="msg_save_flight">Saved.</string>
-    <string name="msg_quit">Quit</string>
     <string name="msg_ras">NSTR</string>
-    <string name="msg_minute">minute(s)</string>
-    <string name="msg_heure">hour(s)</string>
     <string name="msg_export">Data saved!</string>
-    <string name="msg_controleTemps">"Total time of "</string>
     <string name="msg_cancel">Cancel</string>
-    <string name="frag_statistic_years">Years</string>
-    <string name="frag_statistic_night">Night FH %1$dh</string>
-    <string name="frag_statistic_month">Month</string>
+    <string name="frag_statistic_night">Night %1$dh</string>
     <string name="frag_list_nb_flight">%d saving flights</string>
     <string name="frag_list_day">FH DAYTIME</string>
     <string name="frag_list_night">FH NIGHT</string>
@@ -55,7 +47,6 @@
     <string name="frag_one_flight_arr_ifr">IFR Arrival:</string>
     <string name="frag_one_flight_att_day">LDG day</string>
     <string name="frag_number_picker_title">FH on DAY</string>
-    <string name="frag_add_flight_tab_aircraft">Aircraft</string>
     <string name="frag_add_flight_save">Save</string>
     <string name="frag_add_flight_nature">Nature</string>
     <string name="navigation_drawer_close">Close</string>
@@ -71,8 +62,6 @@
     <string name="frag_one_flight_att_night">LDG night</string>
     <string name="frag_one_flight_date">"Flight of "</string>
     <string name="frag_one_flight_delete">Delete</string>
-    <string name="frag_one_flight_function">Function</string>
-    <string name="frag_one_flight_hour">Hours</string>
     <string name="frag_one_flight_hour_day">FH day</string>
     <string name="frag_one_flight_hour_night">"FH night "</string>
     <string name="frag_one_flight_mod">Edit</string>
@@ -82,10 +71,7 @@
     <string name="frag_pref_title_licence">Licence</string>
     <string name="frag_pref_title_pn">Medical</string>
     <string name="frag_statistic_att">Landing statistic</string>
-    <string name="frag_statistic_day">Day FH %1$dh</string>
-    <string name="frag_statistic_error">No FH</string>
-    <string name="frag_statistic_error_att">No LDG</string>
-    <string name="frag_statistic_error_att_and_hdv">NO LDG and no FH</string>
+    <string name="frag_statistic_day">Day %1$dh</string>
     <string name="frag_statistic_repart_hdv">Flight hours statistic</string>
     <string name="msg_valide">Validate</string>
     <string name="frag_pref_fonction">Function</string>
@@ -99,8 +85,6 @@
     <string name="frag_add_flight_simu">Simulation</string>
     <string name="frag_number_picker_duration_minute">Minutes</string>
     <string name="frag_one_flight_ifr">IFR</string>
-    <string name="frag_statistic_duration_att">All LND: %1$d with %2$d day and %3$d night.</string>
-    <string name="frag_statistic_duration_hours">All FH: %1$.1f with %2$.1f day and %3$.1f night. <b>%4$.0f</b> complete flights.</string>
     <string name="msg_import">Log book imported!</string>
     <string name="frag_statistic_att_night">Night LDG %1$dh</string>
     <string name="frag_statistic_att_day">Day LDG %1$dh</string>

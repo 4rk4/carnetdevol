@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scroll"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
@@ -65,7 +65,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ongletAvion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_corner_dark_accent_color"
@@ -101,7 +100,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/frag_add_flight_observation"
-                android:inputType="textAutoComplete|textCapCharacters" />
+                android:importantForAutofill="no"
+                android:inputType="textAutoComplete|textCapCharacters"
+                tools:targetApi="o" />
 
 
             <LinearLayout
@@ -246,6 +247,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_corner_dark_accent_color"
             android:orientation="horizontal"
+            android:baselineAligned="false"
             android:visibility="gone">
 
 

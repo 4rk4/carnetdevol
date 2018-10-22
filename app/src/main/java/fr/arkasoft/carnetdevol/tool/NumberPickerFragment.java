@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.NumberPicker;
@@ -64,12 +63,10 @@ public class NumberPickerFragment extends android.support.v4.app.DialogFragment 
             dureePoints.setText( majDureePoints( ) );
         } );
         
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
         builder.setView( v )
                .setTitle( R.string.frag_number_picker_title )
                // Add action buttons
-               .setPositiveButton( R.string.msg_valide, ( dialog, id ) -> callback.onDialogPositiveClick( NumberPickerFragment.this, heures, minutes ) )
+               .setPositiveButton( R.string.msg_valide, ( dialog, id ) -> callback.onDialogPositiveClick( heures, minutes ) )
                .setNegativeButton( R.string.msg_cancel, ( dialog, id ) -> NumberPickerFragment.this.getDialog( ).cancel( ) );
         
         return builder.create( );
@@ -81,12 +78,9 @@ public class NumberPickerFragment extends android.support.v4.app.DialogFragment 
         return String.valueOf( heures ) + "." + String.valueOf( point );
     }
     
-    /*
-    Permet de communiquer avec l'activity ou le frag appelant
-     */
     public interface OnValidateListener {
-        
-        void onDialogPositiveClick( DialogFragment dialog, int h, int m );
+    
+        void onDialogPositiveClick( int h, int m );
         
     }
 }

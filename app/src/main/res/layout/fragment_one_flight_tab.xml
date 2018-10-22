@@ -1,5 +1,3 @@
-<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:layout_margin="0dp"--><!--android:background="@color/background"--><!--android:padding="0dp"--><!--tools:context="fr.arkasoft.carnetdevol.OneFlightFragment">-->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,14 +17,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/oneFlightSuppression"
             style="@style/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_weight="1"
@@ -35,7 +32,7 @@
         <Button
             android:id="@+id/oneFlightModification"
             style="@style/button"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
@@ -43,4 +40,4 @@
             android:text="@string/frag_one_flight_mod" />
     </LinearLayout>
 
-</LinearLayout><!--</FrameLayout>-->
+</LinearLayout>

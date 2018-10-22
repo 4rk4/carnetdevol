@@ -197,7 +197,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         }
     }
     
-    public void updateFlight( Flight flight, int idFlight ) {
+    public int updateFlight( Flight flight, int idFlight ) {
         // Gets the data repository in write mode
         db = getWritableDatabase( );
         
@@ -230,7 +230,7 @@ public class FlightDbHelper extends SQLiteOpenHelper {
                 COL_ID + "=" + idFlight,
                 null );
         db.close( );
-        
+        return newRowId;
     }
     
     public ArrayList< Flight > getAllFlight( ) {
@@ -655,10 +655,11 @@ public class FlightDbHelper extends SQLiteOpenHelper {
         return tab;
     }
     
-    public void deleteAllFlight( ) {
+    public boolean deleteAllFlight( ) {
         db = getWritableDatabase( );
         boolean res = db.delete( TABLE_NAME, null, null ) > 0;
         db.close( );
+        return res;
     }
     
     public String toString( ) {

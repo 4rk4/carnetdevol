@@ -1,8 +1,8 @@
 package fr.arkasoft.carnetdevol.tool;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -16,13 +16,13 @@ public class DatePickerFragment extends DialogFragment {
     
     private DatePickerDialog.OnDateSetListener callback;
     
-    public void onAttach( Activity activity ) {
-        super.onAttach( activity );
+    public void onAttach( Context context ) {
+        super.onAttach( context );
         
         try {
             callback = ( DatePickerDialog.OnDateSetListener ) Objects.requireNonNull( getActivity( ) ).getSupportFragmentManager( ).findFragmentById( R.id.mainFrag );
         } catch( ClassCastException e ) {
-            throw new ClassCastException( activity.toString( )
+            throw new ClassCastException( context.toString( )
                                           + " must implement OnDateSetListener" );
         }
     }

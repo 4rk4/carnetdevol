@@ -28,12 +28,7 @@ public class Cercle extends View {
     private       int        nbDeNuit;
     private       TypeCercle typeDeCercle;
     private final int        padding     = 10;
-    private       int        bas;
-    private       int        droite;
-    private       int        haut;
-    private       int        gauche;
     private       RectF      oval1;
-    private       int        tailleMax;
     
     public Cercle( Context context, AttributeSet attrs ) {
         super( context, attrs );
@@ -50,15 +45,15 @@ public class Cercle extends View {
     @Override
     protected void onSizeChanged( int w, int h, int oldw, int oldh ) {
         super.onSizeChanged( w, h, oldw, oldh );
-        tailleMax = Math.min( getMeasuredWidth( ), getMeasuredHeight( ) );
+        int tailleMax = Math.min( getMeasuredWidth( ), getMeasuredHeight( ) );
         centerY = getMeasuredHeight( ) / 2;
         centerX = getMeasuredWidth( ) / 2;
         radius = tailleMax / 2;
-        
-        gauche = centerX - radius + padding;
-        haut = centerY - radius + padding;
-        droite = centerX + radius - padding;
-        bas = centerY + radius - padding;
+    
+        int gauche = centerX - radius + padding;
+        int haut   = centerY - radius + padding;
+        int droite = centerX + radius - padding;
+        int bas    = centerY + radius - padding;
         
         oval1 = new RectF( gauche, haut, droite, bas );
     }
@@ -90,7 +85,6 @@ public class Cercle extends View {
         paint.setStyle( Paint.Style.FILL_AND_STROKE );
         paint.setStrokeWidth( padding );
         paint.setColor( Color.DKGRAY );
-        /*RectF oval1 = new RectF( gauche, haut, droite, bas );*/
         canvas.drawOval( oval1, paint );
         
         paint.setStyle( Paint.Style.FILL );
