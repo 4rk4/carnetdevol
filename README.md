@@ -2,7 +2,7 @@
 
 ## Licence
 
-GPL
+GPL v3
 
 ## Description
 
