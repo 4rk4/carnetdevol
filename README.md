@@ -2,7 +2,7 @@
 
 ## Licence
 
-this software use the GPL
+this software use the GPL v3
 
 ## Description
 
