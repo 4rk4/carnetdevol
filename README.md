@@ -2,7 +2,7 @@
 
 ## Licence
 
-this software use the GPL v3
+This software use the GPL v3.
 
 ## Description
 
@@ -11,9 +11,9 @@ The most simple flight log book you can have.
 
 ## Features
 
-* Export and import XML flight log book
-* Save and read your flights
-* Stat of your flight
+* Export and import XML flight log book;
+* Save and read your flights (of course.);
+* Stat of your flight;
 
 ### Play Store
 
