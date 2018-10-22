@@ -1,37 +1,44 @@
+/**
+ * author: 4rk4
+ * url: https://github.com/4rk4/carnetdevol
+ * Licence: GPL v3
+ * Start: 29 oct 2015
+ * 1st publish: 06 nov 2015
+ */
 package fr.arkasoft.carnetdevol.db;
 
 import android.content.Context;
 
-/**
- * Created by Michel on 30/10/2015.
- * Objet Flignt pour manipulation
- */
 public class Flight {
     
     protected int     id;
     protected String  date           = "2017-01-01 00:00:00";
-    protected String  heureDebut     = "00:00";
-    protected String  heureFin       = "00:00";
-    protected String  aircraft_type  = "-";
-    protected String  aircraft_immat = "-";
-    protected String  fonction_bord; //pil - cdt - ep - me - instructeur
-    protected String  nature_vol     = "-"; //vfr - ifr - local - ent
-    protected String  heuresJour     = "00:00";
-    protected String  heuresNuit     = "00:00";
-    protected boolean multi_mono     = false; // True Multi / false Mono
-    protected boolean ifr_vfr        = false; //True ifr - False ifr
-    protected boolean simu_vol       = false; // true simu - false vol
+    protected String  fonction_bord;
+    // PILOTE - CAPTAIN - STUDENT PILOT - CREW MEMBER - INSTRUCTOR
+    protected String  nature_vol     = "-";
+    // TRUE:SIMU - FALSE: FLIGNT
     protected String  arrivees_ifr   = "-";
-    protected int     att_jour       = 0;
-    protected int     att_nuit       = 0;
-    protected String  obs            = "RAS";
-    private   Context context;
+    private   String  heureDebut     = "00:00";
+    private   String  heureFin       = "00:00";
+    private   String  aircraft_type  = "-";
+    private   String  aircraft_immat = "-";
+    //VFR / IFR / LOCAL / TRAINING
+    private   String  heuresJour     = "00:00";
+    private   String  heuresNuit     = "00:00";
+    private   boolean multi_mono     = false;
+    // True Multi / false Mono
+    private   boolean ifr_vfr        = false;
+    //TRUE:IFR / FALSE:VFR
+    private   boolean simu_vol       = false;
+    private   int     att_jour       = 0;
+    private   int     att_nuit       = 0;
+    private   String  obs            = "RAS";
     
     public Flight( ) {
     }
     
     public Flight( Context c ) {
-        this.context = c;
+        Context context = c;
     }
     
     public Flight( int id, String date, String heureDebut, String heureFin, String aircraft_type, String aircraft_immat, String fonction_bord, String nature_vol, String heuresJour, String heuresNuit, boolean multi_mono, boolean ifr_vfr, boolean simu_vol, String arrivees_ifr, int att_jour, int att_nuit, String obs ) {
