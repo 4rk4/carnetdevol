@@ -2,7 +2,7 @@
 
 ## Licence
 
-GPL
+this software use the GPL
 
 ## Description
 
