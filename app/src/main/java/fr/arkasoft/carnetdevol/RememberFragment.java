@@ -13,33 +13,38 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class RememberFragment extends Fragment {
-    
-    public RememberFragment( ) {
+
+    public RememberFragment ( ) {
+
     }
-    
+
+
     @Override
-    public View onCreateView( @NonNull LayoutInflater inflater, ViewGroup container,
-                              Bundle savedInstanceState ) {
-        View     vue      = inflater.inflate( R.layout.fragment_remember, container, false );
-        TextView datePn   = vue.findViewById( R.id.visitePn );
-        TextView dateCert = vue.findViewById( R.id.certificatMedical );
-        
-        SharedPreferences preferences   = PreferenceManager.getDefaultSharedPreferences( getActivity( ) );
-        String            nextPn        = preferences.getString( "nextDatePn", "-" );
-        String            nextCertifMed = preferences.getString( "nextDateCertif", "-" );
-        
-        datePn.setText( getResources( ).getString( R.string.rappel_pn ) + ": " + nextPn );
-        dateCert.setText( getResources( ).getString( R.string.rappel_medical ) + ": " + nextCertifMed );
-        
+    public View onCreateView ( @NonNull LayoutInflater inflater, ViewGroup container,
+                               Bundle savedInstanceState ) {
+
+        View     vue      = inflater.inflate ( R.layout.fragment_remember, container, false );
+        TextView datePn   = vue.findViewById ( R.id.visitePn );
+        TextView dateCert = vue.findViewById ( R.id.certificatMedical );
+
+        SharedPreferences preferences   = PreferenceManager.getDefaultSharedPreferences ( getActivity ( ) );
+        String            nextPn        = preferences.getString ( "nextDatePn", "-" );
+        String            nextCertifMed = preferences.getString ( "nextDateCertif", "-" );
+
+        datePn.setText ( getResources ( ).getString ( R.string.rappel_pn ) + ": " + nextPn );
+        dateCert.setText ( getResources ( ).getString ( R.string.rappel_medical ) + ": " + nextCertifMed );
+
         return vue;
     }
-    
-    @SuppressWarnings( "ConstantConditions" )
+
+
+    @SuppressWarnings ( "ConstantConditions" )
     @Override
-    public void onActivityCreated( @Nullable Bundle savedInstanceState ) {
-        super.onActivityCreated( savedInstanceState );
-        ( ( AppCompatActivity ) getActivity( ) ).getSupportActionBar( ).setSubtitle( R.string.act_main_drawer_racall );
-        ( ( AppCompatActivity ) getActivity( ) ).getSupportActionBar( ).setTitle( R.string.nav_header_main_app_name );
+    public void onActivityCreated ( @Nullable Bundle savedInstanceState ) {
+
+        super.onActivityCreated ( savedInstanceState );
+        ( ( AppCompatActivity ) getActivity ( ) ).getSupportActionBar ( ).setSubtitle ( R.string.act_main_drawer_racall );
+        ( ( AppCompatActivity ) getActivity ( ) ).getSupportActionBar ( ).setTitle ( R.string.nav_header_main_app_name );
     }
-    
+
 }

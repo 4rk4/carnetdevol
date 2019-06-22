@@ -36,7 +36,7 @@ import fr.arkasoft.carnetdevol.tool.DatePickerFragment;
 import fr.arkasoft.carnetdevol.tool.NumberPickerFragment;
 
 public class AddFlightFragment extends Fragment implements NumberPickerFragment.OnValidateListener, DatePickerDialog.OnDateSetListener {
-    
+
     private       View                 rootView;
     private       boolean              isHeureNuit  = false;
     private       boolean              isHeureJour  = false;
@@ -54,301 +54,323 @@ public class AddFlightFragment extends Fragment implements NumberPickerFragment.
     private       NumberPicker         npAttDeJour;
     private       NumberPicker         npAttDeNuit;
     private       Spinner              spinFonction;
-    private final View.OnClickListener addOneFlight = new View.OnClickListener( ) {
-        
+    private final View.OnClickListener addOneFlight = new View.OnClickListener ( ) {
+
         @Override
-        public void onClick( View view ) {
-            String   laDate       = btDate.getText( ).toString( );
-            String   heureDebut   = btHeureDebut.getText( ).toString( );
-            String   heuresJour   = btHeuresDeJour.getText( ).toString( );
-            String   heuresNuit   = btHeuresDeNuit.getText( ).toString( );
-            String   nature       = actNatureVol.getText( ).toString( );
-            String   typeAvion    = actTypeAvion.getText( ).toString( );
-            String   immat        = actImmat.getText( ).toString( );
-            String   fonction     = String.valueOf( spinFonction.getSelectedItemId( ) );
-            boolean  simu         = ( ( Switch ) rootView.findViewById( R.id.simulation ) ).isChecked( );
-            boolean  ifr          = ( ( Switch ) rootView.findViewById( R.id.ifr ) ).isChecked( );
-            boolean  multi        = ( ( Switch ) rootView.findViewById( R.id.multi ) ).isChecked( );
-            String   arriveesIfr  = ( ( EditText ) rootView.findViewById( R.id.arriveesIfr ) ).getText( ).toString( );
-            String   obs          = ( ( EditText ) rootView.findViewById( R.id.observation ) ).getText( ).toString( );
-            int      attNuit      = ( ( NumberPicker ) rootView.findViewById( R.id.attNuit ) ).getValue( );
-            int      attJour      = ( ( NumberPicker ) rootView.findViewById( R.id.attJour ) ).getValue( );
+        public void onClick ( View view ) {
+
+            String   laDate       = btDate.getText ( ).toString ( );
+            String   heureDebut   = btHeureDebut.getText ( ).toString ( );
+            String   heuresJour   = btHeuresDeJour.getText ( ).toString ( );
+            String   heuresNuit   = btHeuresDeNuit.getText ( ).toString ( );
+            String   nature       = actNatureVol.getText ( ).toString ( );
+            String   typeAvion    = actTypeAvion.getText ( ).toString ( );
+            String   immat        = actImmat.getText ( ).toString ( );
+            String   fonction     = String.valueOf ( spinFonction.getSelectedItemId ( ) );
+            boolean  simu         = ( ( Switch ) rootView.findViewById ( R.id.simulation ) ).isChecked ( );
+            boolean  ifr          = ( ( Switch ) rootView.findViewById ( R.id.ifr ) ).isChecked ( );
+            boolean  multi        = ( ( Switch ) rootView.findViewById ( R.id.multi ) ).isChecked ( );
+            String   arriveesIfr  = ( ( EditText ) rootView.findViewById ( R.id.arriveesIfr ) ).getText ( ).toString ( );
+            String   obs          = ( ( EditText ) rootView.findViewById ( R.id.observation ) ).getText ( ).toString ( );
+            int      attNuit      = ( ( NumberPicker ) rootView.findViewById ( R.id.attNuit ) ).getValue ( );
+            int      attJour      = ( ( NumberPicker ) rootView.findViewById ( R.id.attJour ) ).getValue ( );
             String   dateFormmater;
-            String[] dateSplitter = laDate.split( "/" );
-            int      day          = Integer.valueOf( dateSplitter[ 0 ] );
-            int      month        = Integer.valueOf( dateSplitter[ 1 ] );
-            int      year         = Integer.valueOf( dateSplitter[ 2 ] );
+            String[] dateSplitter = laDate.split ( "/" );
+            int      day          = Integer.valueOf ( dateSplitter[ 0 ] );
+            int      month        = Integer.valueOf ( dateSplitter[ 1 ] );
+            int      year         = Integer.valueOf ( dateSplitter[ 2 ] );
             int      heure;
             int      minutes;
-            
+
             // Contrôle de saisie
-            if( ( !heuresJour.contains( ":" ) ) && ( !heuresNuit.contains( ":" ) ) ) {
-                Snackbar.make( rootView, getResources( ).getString( R.string.error_nb_heures ), Snackbar.LENGTH_LONG ).show( );
+            if ( ( !heuresJour.contains ( ":" ) ) && ( !heuresNuit.contains ( ":" ) ) ) {
+                Snackbar.make ( rootView, getResources ( ).getString ( R.string.error_nb_heures ), Snackbar.LENGTH_LONG ).show ( );
                 return;
             }
             Calendar cal;
-            if( !heureDebut.contains( ":" ) ) {
-                Snackbar.make( rootView, getResources( ).getString( R.string.error_start_time ), Snackbar.LENGTH_LONG ).show( );
+            if ( !heureDebut.contains ( ":" ) ) {
+                Snackbar.make ( rootView, getResources ( ).getString ( R.string.error_start_time ), Snackbar.LENGTH_LONG ).show ( );
                 return;
             } else {
-                cal = Calendar.getInstance( );
-                cal.set( Calendar.DAY_OF_MONTH, day );
-                cal.set( Calendar.MONTH, month );
-                cal.set( Calendar.YEAR, year );
-                String[] hmDebut = heureDebut.split( ":" );
-                heure = Integer.valueOf( hmDebut[ 0 ] );
-                minutes = Integer.valueOf( hmDebut[ 1 ] );
-                cal.set( Calendar.HOUR_OF_DAY, heure );
-                cal.set( Calendar.MINUTE, minutes );
-                cal.set( Calendar.SECOND, 0 );
-                dateFormmater = String.format( "%4d-%02d-%02d %s:00", year, month, day, heureDebut );
+                cal = Calendar.getInstance ( );
+                cal.set ( Calendar.DAY_OF_MONTH, day );
+                cal.set ( Calendar.MONTH, month );
+                cal.set ( Calendar.YEAR, year );
+                String[] hmDebut = heureDebut.split ( ":" );
+                heure = Integer.valueOf ( hmDebut[ 0 ] );
+                minutes = Integer.valueOf ( hmDebut[ 1 ] );
+                cal.set ( Calendar.HOUR_OF_DAY, heure );
+                cal.set ( Calendar.MINUTE, minutes );
+                cal.set ( Calendar.SECOND, 0 );
+                dateFormmater = String.format ( "%4d-%02d-%02d %s:00", year, month, day, heureDebut );
             }
-            if( !heuresJour.contains( ":" ) ) {
+            if ( !heuresJour.contains ( ":" ) ) {
                 heuresJour = "00:00";
             } else {
-                String[] heureMinuteJour = heuresJour.split( ":" );
-                cal.add( Calendar.HOUR_OF_DAY, Integer.valueOf( heureMinuteJour[ 0 ] ) );
-                cal.add( Calendar.MINUTE, Integer.valueOf( heureMinuteJour[ 1 ] ) );
+                String[] heureMinuteJour = heuresJour.split ( ":" );
+                cal.add ( Calendar.HOUR_OF_DAY, Integer.valueOf ( heureMinuteJour[ 0 ] ) );
+                cal.add ( Calendar.MINUTE, Integer.valueOf ( heureMinuteJour[ 1 ] ) );
             }
-            if( !heuresNuit.contains( ":" ) ) {
+            if ( !heuresNuit.contains ( ":" ) ) {
                 heuresNuit = "00:00";
             } else {
-                String[] heureMinuteNuit = heuresNuit.split( ":" );
-                cal.add( Calendar.HOUR_OF_DAY, Integer.valueOf( heureMinuteNuit[ 0 ] ) );
-                cal.add( Calendar.MINUTE, Integer.valueOf( heureMinuteNuit[ 1 ] ) );
+                String[] heureMinuteNuit = heuresNuit.split ( ":" );
+                cal.add ( Calendar.HOUR_OF_DAY, Integer.valueOf ( heureMinuteNuit[ 0 ] ) );
+                cal.add ( Calendar.MINUTE, Integer.valueOf ( heureMinuteNuit[ 1 ] ) );
             }
-            
-            String heureFin = new SimpleDateFormat( "HH:mm" ).format( cal.getTime( ) );
-            
-            Flight oneFlight = new Flight( dateFormmater, heureDebut, heureFin, typeAvion,
-                                           immat, fonction, nature, heuresJour, heuresNuit,
-                                           multi, ifr, simu,
-                                           arriveesIfr,
-                                           attJour, attNuit,
-                                           obs );
-            if( isMod ) {
-                fdbh.updateFlight( oneFlight, idFlight );
+
+            String heureFin = new SimpleDateFormat ( "HH:mm" ).format ( cal.getTime ( ) );
+
+            Flight oneFlight = new Flight ( dateFormmater, heureDebut, heureFin, typeAvion,
+                                            immat, fonction, nature, heuresJour, heuresNuit,
+                                            multi, ifr, simu,
+                                            arriveesIfr,
+                                            attJour, attNuit,
+                                            obs );
+            if ( isMod ) {
+                fdbh.updateFlight ( oneFlight, idFlight );
             } else {
-                fdbh.insertFlight( oneFlight );
+                fdbh.insertFlight ( oneFlight );
             }
-            
+
             // Information utilisateur
-            Snackbar.make( rootView, getResources( ).getString( R.string.msg_save_flight ), Snackbar.LENGTH_LONG ).show( );
+            Snackbar.make ( rootView, getResources ( ).getString ( R.string.msg_save_flight ), Snackbar.LENGTH_LONG ).show ( );
         }
     };
     private       Switch               btIfr;
     private       Switch               btSimu;
     private       Switch               btMulti;
     private       EditText             etObservations;
-    
-    public AddFlightFragment( ) {
+
+
+    public AddFlightFragment ( ) {
+
     }
-    
+
+
     @Override
-    public View onCreateView( @NonNull final LayoutInflater inflater, ViewGroup container,
-                              Bundle savedInstanceState ) {
-        rootView = inflater.inflate( R.layout.fragment_add_flight, container, false );
-        
-        SharedPreferences preferences  = PreferenceManager.getDefaultSharedPreferences( getContext( ) );
-        String            prefFonction = preferences.getString( "prefFunction", "" );
-        
-        btSimu = rootView.findViewById( R.id.simulation );
-        btMulti = rootView.findViewById( R.id.multi );
-        btIfr = rootView.findViewById( R.id.ifr );
-        btHeureDebut = rootView.findViewById( R.id.flight_heure_debut );
-        etObservations = rootView.findViewById( R.id.observation );
-        
-        btHeuresDeJour = rootView.findViewById( R.id.jour );
-        btHeuresDeJour.setOnClickListener( view -> {
-            showNumberPickerDialog( "heureDeJour" );
+    public View onCreateView ( @NonNull final LayoutInflater inflater, ViewGroup container,
+                               Bundle savedInstanceState ) {
+
+        rootView = inflater.inflate ( R.layout.fragment_add_flight, container, false );
+
+        SharedPreferences preferences  = PreferenceManager.getDefaultSharedPreferences ( getContext ( ) );
+        String            prefFonction = preferences.getString ( "prefFunction", "" );
+
+        btSimu = rootView.findViewById ( R.id.simulation );
+        btMulti = rootView.findViewById ( R.id.multi );
+        btIfr = rootView.findViewById ( R.id.ifr );
+        btHeureDebut = rootView.findViewById ( R.id.flight_heure_debut );
+        etObservations = rootView.findViewById ( R.id.observation );
+
+        btHeuresDeJour = rootView.findViewById ( R.id.jour );
+        btHeuresDeJour.setOnClickListener ( view -> {
+            showNumberPickerDialog ( "heureDeJour" );
             // Pour ouvrir le numberpicker fonction de nuit ou jour
             isHeureJour = true;
             isHeureNuit = false;
         } );
-        
-        btHeuresDeNuit = rootView.findViewById( R.id.nuit );
-        btHeuresDeNuit.setOnClickListener( view -> {
-            showNumberPickerDialog( "heureDeNuit" );
+
+        btHeuresDeNuit = rootView.findViewById ( R.id.nuit );
+        btHeuresDeNuit.setOnClickListener ( view -> {
+            showNumberPickerDialog ( "heureDeNuit" );
             isHeureJour = false;
             isHeureNuit = true;
         } );
-        
-        actTypeAvion = rootView.findViewById( R.id.avionType );
-        actImmat = rootView.findViewById( R.id.avionImmat );
-        actNatureVol = rootView.findViewById( R.id.natureVol );
-        actArriveesIfr = rootView.findViewById( R.id.arriveesIfr );
-        
-        npAttDeJour = rootView.findViewById( R.id.attJour );
-        npAttDeJour.setMaxValue( 20 );
-        
-        npAttDeNuit = rootView.findViewById( R.id.attNuit );
-        npAttDeNuit.setMaxValue( 20 );
-    
-        Button btOngletAtt = rootView.findViewById( R.id.titleOngletAtt );
-        btOngletAtt.setOnClickListener( view -> {
-            LinearLayout onglet = rootView.findViewById( R.id.ongletAtt );
-            annimationDesOnglets( onglet );
+
+        actTypeAvion = rootView.findViewById ( R.id.avionType );
+        actImmat = rootView.findViewById ( R.id.avionImmat );
+        actNatureVol = rootView.findViewById ( R.id.natureVol );
+        actArriveesIfr = rootView.findViewById ( R.id.arriveesIfr );
+
+        npAttDeJour = rootView.findViewById ( R.id.attJour );
+        npAttDeJour.setMaxValue ( 20 );
+
+        npAttDeNuit = rootView.findViewById ( R.id.attNuit );
+        npAttDeNuit.setMaxValue ( 20 );
+
+        Button btOngletAtt = rootView.findViewById ( R.id.titleOngletAtt );
+        btOngletAtt.setOnClickListener ( view -> {
+            LinearLayout onglet = rootView.findViewById ( R.id.ongletAtt );
+            annimationDesOnglets ( onglet );
         } );
-    
-        Button btOngletDivers = rootView.findViewById( R.id.titleOngletDiver );
-        btOngletDivers.setOnClickListener( view -> {
-            LinearLayout onglet = rootView.findViewById( R.id.ongletDivers );
-            annimationDesOnglets( onglet );
+
+        Button btOngletDivers = rootView.findViewById ( R.id.titleOngletDiver );
+        btOngletDivers.setOnClickListener ( view -> {
+            LinearLayout onglet = rootView.findViewById ( R.id.ongletDivers );
+            annimationDesOnglets ( onglet );
         } );
-    
-        Button btOngletIfr = rootView.findViewById( R.id.titleOngletIfr );
-        btOngletIfr.setOnClickListener( view -> {
-            LinearLayout onglet = rootView.findViewById( R.id.ongletIfr );
-            annimationDesOnglets( onglet );
+
+        Button btOngletIfr = rootView.findViewById ( R.id.titleOngletIfr );
+        btOngletIfr.setOnClickListener ( view -> {
+            LinearLayout onglet = rootView.findViewById ( R.id.ongletIfr );
+            annimationDesOnglets ( onglet );
         } );
-        
-        btDate = rootView.findViewById( ( R.id.flight_date ) );
-        btDate.setOnClickListener( view -> {
-            DatePickerFragment datePickerFragment = new DatePickerFragment( );
-            datePickerFragment.show( Objects.requireNonNull( getActivity( ) ).getSupportFragmentManager( ), "datePicker" );
+
+        btDate = rootView.findViewById ( ( R.id.flight_date ) );
+        btDate.setOnClickListener ( view -> {
+            DatePickerFragment datePickerFragment = new DatePickerFragment ( );
+            datePickerFragment.show ( Objects.requireNonNull ( getActivity ( ) ).getSupportFragmentManager ( ), "datePicker" );
         } );
-        
-        spinFonction = rootView.findViewById( R.id.fonction );
-        int j = spinFonction.getCount( );
-        for( int i = 0; i < j; i++ ) {
-            if( spinFonction.getItemAtPosition( i ).toString( ).equals( prefFonction ) ) {
-                spinFonction.setSelection( i );
+
+        spinFonction = rootView.findViewById ( R.id.fonction );
+        int j = spinFonction.getCount ( );
+        for ( int i = 0; i < j; i++ ) {
+            if ( spinFonction.getItemAtPosition ( i ).toString ( ).equals ( prefFonction ) ) {
+                spinFonction.setSelection ( i );
                 break;
             }
         }
-        
-        fdbh = new FlightDbHelper( getActivity( ) );
-        
-        ArrayAdapter< String > adapterNature = new ArrayAdapter<>( getActivity( ),
-                                                                   android.R.layout.simple_dropdown_item_1line, fdbh.getNature( ) );
-        actNatureVol.setAdapter( adapterNature );
-        
-        ArrayAdapter< String > adapterTypeAvion = new ArrayAdapter<>( getActivity( ),
-                                                                      android.R.layout.simple_dropdown_item_1line, fdbh.getTypeAvion( ) );
-        actTypeAvion.setAdapter( adapterTypeAvion );
-        
-        ArrayAdapter< String > adapterImmat = new ArrayAdapter<>( getActivity( ),
-                                                                  android.R.layout.simple_dropdown_item_1line, fdbh.getImmat( ) );
-        actImmat.setAdapter( adapterImmat );
-        
-        ArrayAdapter< String > adapterArriveesIfr = new ArrayAdapter<>( getActivity( ),
-                                                                        android.R.layout.simple_dropdown_item_1line, fdbh.getArriveesIFR( ) );
-        actArriveesIfr.setAdapter( adapterArriveesIfr );
-        
+
+        fdbh = new FlightDbHelper ( getActivity ( ) );
+
+        ArrayAdapter < String > adapterNature = new ArrayAdapter <> ( getActivity ( ),
+                                                                      android.R.layout.simple_dropdown_item_1line, fdbh.getNature ( ) );
+        actNatureVol.setAdapter ( adapterNature );
+
+        ArrayAdapter < String > adapterTypeAvion = new ArrayAdapter <> ( getActivity ( ),
+                                                                         android.R.layout.simple_dropdown_item_1line, fdbh.getTypeAvion ( ) );
+        actTypeAvion.setAdapter ( adapterTypeAvion );
+
+        ArrayAdapter < String > adapterImmat = new ArrayAdapter <> ( getActivity ( ),
+                                                                     android.R.layout.simple_dropdown_item_1line, fdbh.getImmat ( ) );
+        actImmat.setAdapter ( adapterImmat );
+
+        ArrayAdapter < String > adapterArriveesIfr = new ArrayAdapter <> ( getActivity ( ),
+                                                                           android.R.layout.simple_dropdown_item_1line, fdbh.getArriveesIFR ( ) );
+        actArriveesIfr.setAdapter ( adapterArriveesIfr );
+
         // On met la date sur le bouton pour éviter une manip
-        Calendar         dateDuJour = new GregorianCalendar( );
-        SimpleDateFormat formatDate = new SimpleDateFormat( "dd/MM/yyyy" );
-        btDate.setText( formatDate.format( dateDuJour.getTime( ) ) );
-        
+        Calendar         dateDuJour = new GregorianCalendar ( );
+        SimpleDateFormat formatDate = new SimpleDateFormat ( "dd/MM/yyyy" );
+        btDate.setText ( formatDate.format ( dateDuJour.getTime ( ) ) );
+
         // Test de la modification ou non
-        Bundle bundle = this.getArguments( );
-        if( bundle != null ) {
-            idFlight = bundle.getInt( "id" );
-            enModification( idFlight );
+        Bundle bundle = this.getArguments ( );
+        if ( bundle != null ) {
+            idFlight = bundle.getInt ( "id" );
+            enModification ( idFlight );
         }
-        Button btAddOneFlight = rootView.findViewById( R.id.addOneFlight );
-        btAddOneFlight.setOnClickListener( addOneFlight );
+        Button btAddOneFlight = rootView.findViewById ( R.id.addOneFlight );
+        btAddOneFlight.setOnClickListener ( addOneFlight );
         return rootView;
     }
-    
-    private void showNumberPickerDialog( String demandeur ) {
-        DialogFragment newFragment = new NumberPickerFragment( );
-        newFragment.show( Objects.requireNonNull( getActivity( ) ).getSupportFragmentManager( ), demandeur );
+
+
+    private void showNumberPickerDialog ( String demandeur ) {
+
+        DialogFragment newFragment = new NumberPickerFragment ( );
+        newFragment.show ( Objects.requireNonNull ( getActivity ( ) ).getSupportFragmentManager ( ), demandeur );
     }
-    
-    private void annimationDesOnglets( final View v ) {
-        v.clearAnimation( );
+
+
+    private void annimationDesOnglets ( final View v ) {
+
+        v.clearAnimation ( );
         int vitesse = 300;
-        
+
         // getWidth de view n'est pas accessible lors de la premiere fois
         int tailleLargeur;
-        if( v.getWidth( ) == 0 ) {
-            tailleLargeur = rootView.getWidth( );
+        if ( v.getWidth ( ) == 0 ) {
+            tailleLargeur = rootView.getWidth ( );
         } else {
-            tailleLargeur = v.getWidth( );
+            tailleLargeur = v.getWidth ( );
         }
-        
-        int test = v.getVisibility( );
-        if( test == View.VISIBLE ) {
-            TranslateAnimation translateAnimationClose = new TranslateAnimation( 0, tailleLargeur, 0, 0 );
-            translateAnimationClose.setDuration( vitesse );
-            translateAnimationClose.setAnimationListener( new Animation.AnimationListener( ) {
-                
+
+        int test = v.getVisibility ( );
+        if ( test == View.VISIBLE ) {
+            TranslateAnimation translateAnimationClose = new TranslateAnimation ( 0, tailleLargeur, 0, 0 );
+            translateAnimationClose.setDuration ( vitesse );
+            translateAnimationClose.setAnimationListener ( new Animation.AnimationListener ( ) {
+
                 @Override
-                public void onAnimationStart( Animation animation ) {
+                public void onAnimationStart ( Animation animation ) {
+
                 }
-                
+
+
                 @Override
-                public void onAnimationEnd( Animation animation ) {
-                    v.setVisibility( View.GONE );
+                public void onAnimationEnd ( Animation animation ) {
+
+                    v.setVisibility ( View.GONE );
                 }
-                
+
+
                 @Override
-                public void onAnimationRepeat( Animation animation ) {
+                public void onAnimationRepeat ( Animation animation ) {
+
                 }
             } );
-            v.startAnimation( translateAnimationClose );
-        
-        } else if( test == View.GONE ) {
-            
-            TranslateAnimation translateAnimation = new TranslateAnimation( tailleLargeur, 0, 0, 0 );
-            translateAnimation.setDuration( vitesse );
-            
-            v.startAnimation( translateAnimation );
-            v.setVisibility( View.VISIBLE );
+            v.startAnimation ( translateAnimationClose );
+
+        } else if ( test == View.GONE ) {
+
+            TranslateAnimation translateAnimation = new TranslateAnimation ( tailleLargeur, 0, 0, 0 );
+            translateAnimation.setDuration ( vitesse );
+
+            v.startAnimation ( translateAnimation );
+            v.setVisibility ( View.VISIBLE );
         }
     }
-    
-    private void enModification( int idFlight ) {
+
+
+    private void enModification ( int idFlight ) {
+
         isMod = true;
-        Flight f = fdbh.getOneFlightDb( idFlight );
-        btDate.setText( FlightDbHelper.formatOnlyDateAffichage( f.getDate( ) ) );
-        btHeureDebut.setText( f.getHeureDebut( ) );
-        btHeuresDeJour.setText( f.getHeuresJour( ) );
-        btHeuresDeNuit.setText( f.getHeuresNuit( ) );
-        actNatureVol.setText( f.getNature_vol( ) );
-        actTypeAvion.setText( f.getAircraft_type( ) );
-        actImmat.setText( f.getAircraft_immat( ) );
-        int compteur = spinFonction.getCount( );
-        for( int i = 0; i < compteur; i++ ) {
-            if( spinFonction.getItemAtPosition( i ).toString( ).equals( f.getFonction_bord( ) ) ) {
-                spinFonction.setSelection( i );
+        Flight f = fdbh.getOneFlightDb ( idFlight );
+        btDate.setText ( FlightDbHelper.formatOnlyDateAffichage ( f.getDate ( ) ) );
+        btHeureDebut.setText ( f.getHeureDebut ( ) );
+        btHeuresDeJour.setText ( f.getHeuresJour ( ) );
+        btHeuresDeNuit.setText ( f.getHeuresNuit ( ) );
+        actNatureVol.setText ( f.getNature_vol ( ) );
+        actTypeAvion.setText ( f.getAircraft_type ( ) );
+        actImmat.setText ( f.getAircraft_immat ( ) );
+        int compteur = spinFonction.getCount ( );
+        for ( int i = 0; i < compteur; i++ ) {
+            if ( spinFonction.getItemAtPosition ( i ).toString ( ).equals ( f.getFonction_bord ( ) ) ) {
+                spinFonction.setSelection ( i );
                 break;
             }
         }
-        if( f.isSimu_vol( ) )
-            btSimu.setChecked( true );
-        if( f.isIfr_vfr( ) )
-            btIfr.setChecked( true );
-        if( f.isMulti_mono( ) )
-            btMulti.setChecked( true );
-        actArriveesIfr.setText( f.getArrivees_ifr( ) );
-        etObservations.setText( f.getObs( ) );
-        npAttDeNuit.setValue( f.getAtt_nuit( ) );
-        npAttDeJour.setValue( f.getAtt_jour( ) );
+        if ( f.isSimu_vol ( ) )
+            btSimu.setChecked ( true );
+        if ( f.isIfr_vfr ( ) )
+            btIfr.setChecked ( true );
+        if ( f.isMulti_mono ( ) )
+            btMulti.setChecked ( true );
+        actArriveesIfr.setText ( f.getArrivees_ifr ( ) );
+        etObservations.setText ( f.getObs ( ) );
+        npAttDeNuit.setValue ( f.getAtt_nuit ( ) );
+        npAttDeJour.setValue ( f.getAtt_jour ( ) );
     }
-    
-    @SuppressWarnings( "ConstantConditions" )
+
+
+    @SuppressWarnings ( "ConstantConditions" )
     @Override
-    public void onActivityCreated( @Nullable Bundle savedInstanceState ) {
-        super.onActivityCreated( savedInstanceState );
-        ( ( AppCompatActivity ) getActivity( ) ).getSupportActionBar( ).setSubtitle( R.string.act_main_drawer_add );
-        ( ( AppCompatActivity ) getActivity( ) ).getSupportActionBar( ).setTitle( R.string.nav_header_main_app_name );
+    public void onActivityCreated ( @Nullable Bundle savedInstanceState ) {
+
+        super.onActivityCreated ( savedInstanceState );
+        ( ( AppCompatActivity ) getActivity ( ) ).getSupportActionBar ( ).setSubtitle ( R.string.act_main_drawer_add );
+        ( ( AppCompatActivity ) getActivity ( ) ).getSupportActionBar ( ).setTitle ( R.string.nav_header_main_app_name );
     }
-    
+
+
     @Override
-    public void onDialogPositiveClick( int h, int m ) {
+    public void onDialogPositiveClick ( int h, int m ) {
+
         Button bt = null;
-        if( isHeureJour ) {
+        if ( isHeureJour ) {
             bt = btHeuresDeJour;
-        } else if( isHeureNuit ) {
+        } else if ( isHeureNuit ) {
             bt = btHeuresDeNuit;
         }
         assert bt != null;
-        bt.setText( String.format( "%02d:%02d", h, m ) );
+        bt.setText ( String.format ( "%02d:%02d", h, m ) );
     }
-    
-    public void onDateSet( DatePicker view, int year, int month, int day ) {
-        btDate.setText( String.format( "%02d/%02d/%4d", day, month + 1, year ) );
+
+
+    public void onDateSet ( DatePicker view, int year, int month, int day ) {
+
+        btDate.setText ( String.format ( "%02d/%02d/%4d", day, month + 1, year ) );
     }
 }

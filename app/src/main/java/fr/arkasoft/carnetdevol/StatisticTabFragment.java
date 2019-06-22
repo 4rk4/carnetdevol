@@ -10,23 +10,26 @@ import android.view.ViewGroup;
 import java.util.Objects;
 
 public class StatisticTabFragment extends Fragment {
-    
-    public static StatisticTabFragment newInstance( int pos ) {
-        StatisticTabFragment stf  = new StatisticTabFragment( );
-        Bundle               args = new Bundle( );
-        args.putInt( "pos", pos );
-        stf.setArguments( args );
+
+    public static StatisticTabFragment newInstance ( int pos ) {
+
+        StatisticTabFragment stf  = new StatisticTabFragment ( );
+        Bundle               args = new Bundle ( );
+        args.putInt ( "pos", pos );
+        stf.setArguments ( args );
         return stf;
     }
-    
+
+
     @Override
-    public View onCreateView( @NonNull LayoutInflater inflater,
-                              ViewGroup container, Bundle savedInstanceState ) {
+    public View onCreateView ( @NonNull LayoutInflater inflater,
+                               ViewGroup container, Bundle savedInstanceState ) {
+
         View   rootView;
-        Bundle args   = getArguments( );
-        int    numVue = Objects.requireNonNull( args ).getInt( "pos" );
+        Bundle args   = getArguments ( );
+        int    numVue = Objects.requireNonNull ( args ).getInt ( "pos" );
         int    resId;
-        switch( numVue ) {
+        switch ( numVue ) {
             case 0:
                 resId = R.layout.fragment_statistic_hdv;
                 break;
@@ -37,8 +40,8 @@ public class StatisticTabFragment extends Fragment {
                 resId = R.layout.fragment_statistic_hdv;
                 break;
         }
-        
-        rootView = inflater.inflate( resId, null );
+
+        rootView = inflater.inflate ( resId, null );
         return rootView;
     }
 }
